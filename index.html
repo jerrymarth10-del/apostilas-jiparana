@@ -27,7 +27,7 @@ a{text-decoration:none;color:inherit} img{display:block;max-width:100%}
 .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);font-size:.85rem;font-weight:900;text-transform:uppercase;box-shadow:var(--shadow);backdrop-filter: blur(10px)}
 .hero h1{font-family:Anton, Inter, sans-serif;text-transform:uppercase;letter-spacing:.5px;line-height:.94;margin:16px 0 14px;font-size:clamp(3rem, 7vw, 6.6rem);text-shadow:0 10px 30px rgba(255,42,42,.15)}
 .hero h1 .yellow{color:var(--yellow)}
-.hero p{font-size:clamp(1rem, 1.5vw, 1.18rem);line-height:1.129,90;color:#eef3ff;max-width:650px;margin:0 0 14px}
+.hero p{font-size:clamp(1rem, 1.5vw, 1.18rem);line-height:1.7;color:#eef3ff;max-width:650px;margin:0 0 14px}
 .hero-points{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0 24px}
 .hero-points .point{padding:11px 14px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);font-weight:800;color:#fff}
 .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
@@ -73,18 +73,6 @@ section{padding:78px 0}.section-title{max-width:860px;text-align:center;margin:0
 .test-card{min-width:260px;max-width:260px;scroll-snap-align:start;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.10);background:#0a1018;flex:0 0 auto;box-shadow:0 18px 45px rgba(0,0,0,.35)}
 .test-card .frame{padding:10px;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02))}
 .test-card img{width:100%;height:460px;object-fit:cover;display:block;border-radius:18px}
-.testimonial-shot{width:100%;aspect-ratio:9/16;overflow:hidden;border-radius:18px;background:#fff}
-.testimonial-shot img{width:1000%;height:100%;max-width:none;object-fit:fill;display:block;border-radius:0}
-.testimonial-shot.shot-0 img{transform:translateX(0)}
-.testimonial-shot.shot-1 img{transform:translateX(-10%)}
-.testimonial-shot.shot-2 img{transform:translateX(-20%)}
-.testimonial-shot.shot-3 img{transform:translateX(-30%)}
-.testimonial-shot.shot-4 img{transform:translateX(-40%)}
-.testimonial-shot.shot-5 img{transform:translateX(-50%)}
-.testimonial-shot.shot-6 img{transform:translateX(-60%)}
-.testimonial-shot.shot-7 img{transform:translateX(-70%)}
-.testimonial-shot.shot-8 img{transform:translateX(-80%)}
-.testimonial-shot.shot-9 img{transform:translateX(-90%)}
 .carousel-controls{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:16px}
 .carousel-btn{width:48px;height:48px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;backdrop-filter: blur(10px);box-shadow:0 22px 70px rgba(0,0,0,.45);font-size:1.2rem}
 .dots{display:flex;gap:8px;justify-content:center}.dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.22);transition:.2s ease}.dot.active{background:var(--yellow);transform:scale(1.2)}
@@ -169,6 +157,13 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
 #depoimentos .test-card img{width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:18px;display:block}
 @media(max-width:980px){#depoimentos .test-card{min-width:82vw;max-width:310px}}
 
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .ticker-track,.btn::after,.status-dot{animation:none!important}
+  .reveal{transition:none!important;transform:none!important}
+  .btn:hover,.btn-ghost:hover,.floating-cta:hover,.carousel-btn:hover{transform:none}
+}
 </style>
 </head>
 <body>
@@ -289,14 +284,14 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
     <div class="testimonials-shell reveal">
       <div class="testimonials">
         <div class="test-track" id="materialTrack">
-          <div class="test-card"><div class="frame"><img src="assets/material_1.jpg" alt="Material 1"></div></div>
-          <div class="test-card"><div class="frame"><img src="assets/material_2.jpg" alt="Material 2"></div></div>
-          <div class="test-card"><div class="frame"><img src="assets/material_3.jpg" alt="Material 3"></div></div>
-          <div class="test-card"><div class="frame"><img src="assets/material_4.jpg" alt="Material 4"></div></div>
-          <div class="test-card"><div class="frame"><img src="assets/material_5.jpg" alt="Material 5"></div></div>
-          <div class="test-card"><div class="frame"><img src="assets/material_6.jpg" alt="Material 6"></div></div>
-          <div class="test-card"><div class="frame"><img src="assets/material_7.jpg" alt="Material 7"></div></div>
-          <div class="test-card"><div class="frame"><img src="assets/material_8.jpg" alt="Material 8"></div></div>
+          <div class="test-card"><div class="frame"><img src="assets/material_1.jpg" alt="Material 1" loading="lazy" decoding="async"></div></div>
+          <div class="test-card"><div class="frame"><img src="assets/material_2.jpg" alt="Material 2" loading="lazy" decoding="async"></div></div>
+          <div class="test-card"><div class="frame"><img src="assets/material_3.jpg" alt="Material 3" loading="lazy" decoding="async"></div></div>
+          <div class="test-card"><div class="frame"><img src="assets/material_4.jpg" alt="Material 4" loading="lazy" decoding="async"></div></div>
+          <div class="test-card"><div class="frame"><img src="assets/material_5.jpg" alt="Material 5" loading="lazy" decoding="async"></div></div>
+          <div class="test-card"><div class="frame"><img src="assets/material_6.jpg" alt="Material 6" loading="lazy" decoding="async"></div></div>
+          <div class="test-card"><div class="frame"><img src="assets/material_7.jpg" alt="Material 7" loading="lazy" decoding="async"></div></div>
+          <div class="test-card"><div class="frame"><img src="assets/material_8.jpg" alt="Material 8" loading="lazy" decoding="async"></div></div>
         </div>
       </div>
       <div class="carousel-controls">
@@ -342,7 +337,7 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
         </form>
 
         <div class="pix-box" id="pixBox" hidden>
-          <div class="pix-status" id="pixStatus"><span class="status-dot"></span> Aguardando pagamento...</div>
+          <div class="pix-status" id="pixStatus" aria-live="polite"><span class="status-dot"></span> Aguardando pagamento...</div>
           <img id="pixQr" alt="QR Code Pix do Mercado Pago" hidden>
           <label class="pix-copy-label">Pix Copia e Cola
             <textarea id="pixCode" readonly rows="3"></textarea>
