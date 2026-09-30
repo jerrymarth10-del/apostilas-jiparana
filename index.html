@@ -163,6 +163,12 @@ section{padding:68px 0}
 footer{color:#6a7d8e;border-color:#dfe9ef}
 @media(max-width:980px){.hero{padding-top:34px}.hero h1{font-size:clamp(2.7rem,13vw,4.6rem)}.hero h1 .yellow{font-size:.48em}.hero-media{margin-top:8px}.top-bar{font-size:.8rem}.section-title{text-align:left}.section-title h2{font-size:clamp(1.9rem,8vw,2.7rem)}}
 
+
+#depoimentos .test-card{min-width:280px;max-width:280px}
+#depoimentos .test-card .frame{padding:8px}
+#depoimentos .test-card img{width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:18px;display:block}
+@media(max-width:980px){#depoimentos .test-card{min-width:82vw;max-width:310px}}
+
 </style>
 </head>
 <body>
@@ -250,23 +256,22 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
     <div class="testimonials-shell reveal">
       <div class="testimonials">
         <div class="test-track" id="testTrack">
-          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-0" role="img" aria-label="Relato de aprovação em três cargos"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
-          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-1" role="img" aria-label="Relato de aprovação em técnico de enfermagem"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
-          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-8" role="img" aria-label="Avaliações de alunos sobre mapas mentais e preparação"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
-          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-6" role="img" aria-label="Avaliações sobre organização do material"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
-          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-4" role="img" aria-label="Avaliações de clientes da plataforma"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
-          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-7" role="img" aria-label="Avaliações sobre acesso e material atualizado"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
-          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-9" role="img" aria-label="Avaliações sobre o acervo"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
-          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-5" role="img" aria-label="Avaliações sobre atendimento e recebimento"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
-          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-3" role="img" aria-label="Relato de estudante satisfeita"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
-          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-2" role="img" aria-label="Mensagem elogiando atendimento e plataforma"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
+          <div class="test-card"><div class="frame"><img src="https://rgglopnpjfryxdbfspbt.supabase.co/storage/v1/object/public/jr-landing/depoimento-conversao-01.png" alt="Relato de aprovação em técnico de enfermagem" loading="eager" decoding="async"></div></div>
+          <div class="test-card"><div class="frame"><img src="https://rgglopnpjfryxdbfspbt.supabase.co/storage/v1/object/public/jr-landing/depoimento-conversao-02.png" alt="Relato de aprovação em três cargos" loading="lazy" decoding="async"></div></div>
+          <div class="test-card"><div class="frame"><img src="https://rgglopnpjfryxdbfspbt.supabase.co/storage/v1/object/public/jr-landing/depoimento-conversao-03.png" alt="Conversa de estudante satisfeita com o material" loading="lazy" decoding="async"></div></div>
+          <div class="test-card"><div class="frame"><img src="https://rgglopnpjfryxdbfspbt.supabase.co/storage/v1/object/public/jr-landing/depoimento-conversao-04.png" alt="Avaliações de alunos sobre o acervo" loading="lazy" decoding="async"></div></div>
+          <div class="test-card"><div class="frame"><img src="https://rgglopnpjfryxdbfspbt.supabase.co/storage/v1/object/public/jr-landing/depoimento-conversao-05.png" alt="Avaliações de alunos sobre o preparatório" loading="lazy" decoding="async"></div></div>
+          <div class="test-card"><div class="frame"><img src="https://rgglopnpjfryxdbfspbt.supabase.co/storage/v1/object/public/jr-landing/depoimento-conversao-06.png" alt="Avaliações de clientes sobre o material" loading="lazy" decoding="async"></div></div>
+          <div class="test-card"><div class="frame"><img src="https://rgglopnpjfryxdbfspbt.supabase.co/storage/v1/object/public/jr-landing/depoimento-conversao-07.png" alt="Depoimentos sobre mapas mentais e preparação" loading="lazy" decoding="async"></div></div>
+          <div class="test-card"><div class="frame"><img src="https://rgglopnpjfryxdbfspbt.supabase.co/storage/v1/object/public/jr-landing/depoimento-conversao-08.png" alt="Avaliações sobre organização e quantidade de conteúdo" loading="lazy" decoding="async"></div></div>
+          <div class="test-card"><div class="frame"><img src="https://rgglopnpjfryxdbfspbt.supabase.co/storage/v1/object/public/jr-landing/depoimento-conversao-09.png" alt="Avaliações sobre acesso e atualização do material" loading="lazy" decoding="async"></div></div>
         </div>
       </div>
       <div class="carousel-controls">
         <button class="carousel-btn" id="prevBtn" type="button" aria-label="Anterior">‹</button>
         <div class="dots" id="dots">
           <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
-          <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
         </div>
         <button class="carousel-btn" id="nextBtn" type="button" aria-label="Próximo">›</button>
       </div>
