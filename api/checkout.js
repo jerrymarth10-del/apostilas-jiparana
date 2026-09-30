@@ -63,6 +63,7 @@ module.exports=async function handler(req,res){
       name:body.name,
       email:body.email,
       cpf:body.cpf,
+      area:body.area,
       checkoutKey
     },req);
     return res.status(out.status).json(out.data);
