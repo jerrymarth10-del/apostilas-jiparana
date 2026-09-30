@@ -76,11 +76,14 @@ section{padding:78px 0}.section-title{max-width:860px;text-align:center;margin:0
 .strike{color:var(--muted);text-decoration:line-through;font-size:1.1rem}.price{font-family:Anton, Inter, sans-serif;font-size:clamp(3.3rem, 9vw, 6rem);line-height:.95;color:var(--yellow);margin:10px 0 6px;text-shadow:0 12px 34px rgba(255,210,63,.18)}.subprice{color:#fff;font-weight:800;margin-bottom:18px}
 .included{margin:22px 0 24px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;text-align:left}.included .item{padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-weight:800}
 .faq{display:grid;gap:16px;max-width:920px;margin:0 auto}
+.whatsapp-support{position:fixed;z-index:260;left:16px;bottom:16px;display:flex;align-items:center;gap:10px;padding:11px 15px;border-radius:999px;background:#25D366;color:#fff;border:1px solid rgba(255,255,255,.35);box-shadow:0 16px 38px rgba(0,0,0,.32);font-weight:900}
+.whatsapp-support .wa-icon{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.18);font-size:16px}
+.whatsapp-support span:last-child{display:grid;line-height:1.05}.whatsapp-support small{font-size:10px;font-weight:700;opacity:.9;margin-top:3px}
 .floating-cta{position:fixed;z-index:250;right:16px;bottom:16px;min-width:290px;max-width:calc(100% - 32px);min-height:62px;padding:16px 20px;color:#fff;background:linear-gradient(180deg,#ff3f3f,#b70000);border:1px solid rgba(255,255,255,.14);box-shadow:0 18px 44px rgba(255,0,0,.34);animation:pulse 1.35s infinite}
 @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.035)}100%{transform:scale(1)}}
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}
 footer{padding:42px 0 110px;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,.08)}
-@media (max-width: 980px){.hero{min-height:auto}.hero-grid,.grid-3,.stats,.included{grid-template-columns:1fr}.compare{grid-template-columns:1fr}.hero-media img{min-height:auto}.cta-row{flex-direction:column}.btn,.btn-ghost{width:100%}.floating-cta{left:16px;right:16px;min-width:auto}.test-card{min-width:78vw;max-width:300px}}
+@media (max-width: 980px){.whatsapp-support{bottom:88px;left:12px;padding:9px 12px}.hero{min-height:auto}.hero-grid,.grid-3,.stats,.included{grid-template-columns:1fr}.compare{grid-template-columns:1fr}.hero-media img{min-height:auto}.cta-row{flex-direction:column}.btn,.btn-ghost{width:100%}.floating-cta{left:16px;right:16px;min-width:auto}.test-card{min-width:78vw;max-width:300px}}
 </style>
 </head>
 <body>
@@ -100,10 +103,10 @@ footer{padding:42px 0 110px;text-align:center;color:var(--muted);border-top:1px 
         <div class="point">✅ Videoaulas completas</div>
       </div>
       <div class="cta-row">
-        <a class="btn" href="https://chk.eduzz.com/39VK55PBWR" target="_blank" rel="noopener noreferrer">GARANTIR MEU MATERIAL DA SESAU</a>
+        <a class="btn" href="#comprar">GARANTIR MEU MATERIAL DA SESAU</a>
         <a class="btn-ghost" href="#material">VER O MATERIAL</a>
       </div>
-      <div class="micro-proof">Compra simples • Redirecionamento para checkout • Ideal para vender com Pix na Eduzz</div>
+      <div class="micro-proof">Compra simples • Pix pelo Mercado Pago • Acesso liberado após a confirmação do pagamento</div>
       <div class="stock-wrap">
         <div class="stock-head"><span>🔥 Procura alta agora</span><span class="hot">83% das vagas já preenchidas</span></div>
         <div class="stock-bar"><div class="stock-fill"></div></div>
@@ -249,7 +252,7 @@ footer{padding:42px 0 110px;text-align:center;color:var(--muted);border-top:1px 
         <div class="item">✅ Videoaulas</div>
         <div class="item">✅ Material digital e muito mais</div>
       </div>
-      <a class="btn" href="https://sun.eduzz.com/8017Y2DA07" target="_blank" rel="noopener noreferrer" style="width:min(100%,560px)">GARANTIR MEU MATERIAL DA SESAU</a>
+      <a class="btn" href="#comprar" style="width:min(100%,560px)">GARANTIR MEU MATERIAL DA SESAU</a>
       <p style="color:var(--muted); margin:16px 0 0; line-height:1.7">jr apostilas agradece.</p>
     </div>
   </div>
@@ -263,15 +266,18 @@ footer{padding:42px 0 110px;text-align:center;color:var(--muted);border-top:1px 
     </div>
     <div class="faq">
       <div class="card faq-item reveal"><h3>Esse material serve para iniciantes?</h3><p>Sim. O material foi organizado para facilitar a preparação de quem quer estudar a área da saúde com mais clareza.</p></div>
-      <div class="card faq-item reveal"><h3>O acesso é imediato?</h3><p>Depois do pagamento confirmado na plataforma, o acesso pode ser liberado automaticamente por ela.</p></div>
+      <div class="card faq-item reveal"><h3>O acesso é imediato?</h3><p>Sim. Após a confirmação do pagamento, você é direcionado para entrar na plataforma de estudos da SESAU.</p></div>
       <div class="card faq-item reveal"><h3>Funciona no celular?</h3><p>Sim. Você pode acessar em celular ou computador, o que facilita muito para quem estuda no dia a dia.</p></div>
       <div class="card faq-item reveal"><h3>O que eu vou receber?</h3><p>Você recebe um preparatório completo com videoaulas, mapas mentais, simulados específicos, questões comentadas, legislação do SUS, Leis 8.080 e 8.142 e muito mais.</p></div>
     </div>
   </div>
 </section>
 
-<footer>JR Apostilas • SESAU Rondônia • Saúde</footer>
-<a class="floating-cta" href="https://chk.eduzz.com/39VK55PBWR" target="_blank" rel="noopener noreferrer">GARANTIR MEU MATERIAL DA SESAU</a>
+<footer>JR Apostilas • SESAU Rondônia • Saúde<br><span style="display:inline-block;margin-top:8px">Suporte ao aluno: WhatsApp (69) 99353-9150</span></footer>
+<a class="whatsapp-support" href="https://wa.me/5569993539150?text=Ol%C3%A1%2C%20adquiri%20o%20preparat%C3%B3rio%20SESAU%20e%20preciso%20de%20suporte." target="_blank" rel="noopener noreferrer" aria-label="Falar com o suporte da JR Apostilas no WhatsApp">
+  <span class="wa-icon">✓</span><span><strong>Suporte</strong><small>WhatsApp</small></span>
+</a>
+<a class="floating-cta" href="#comprar">GARANTIR MEU MATERIAL DA SESAU</a>
 
 
 <script>
