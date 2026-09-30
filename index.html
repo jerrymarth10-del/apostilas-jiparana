@@ -50,6 +50,10 @@ a{text-decoration:none;color:inherit} img{display:block;max-width:100%}
 @keyframes stockShine{from{transform:translateX(0)}to{transform:translateX(120px)}}
 .hero-media{position:relative;border-radius:30px;overflow:hidden;border:1px solid rgba(255,255,255,.12);background:#0a1018;box-shadow:0 30px 80px rgba(0,0,0,.55);animation:floaty 5s ease-in-out infinite}
 .hero-media img{width:100%;min-height:640px;object-fit:cover}
+.hero-media{display:flex;align-items:center;justify-content:center;padding:12px}
+.hero-video-shell{width:100%;display:grid;gap:10px;justify-items:center}
+.hero-video-label{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);font-size:.82rem;font-weight:900;color:#fff}
+.hero-video{display:block;width:auto;max-width:100%;height:min(72vh,720px);border-radius:20px;background:#000;box-shadow:0 22px 60px rgba(0,0,0,.38)}
 .hero-media::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.30)),radial-gradient(circle at 15% 20%, rgba(255,42,42,.10), transparent 28%),radial-gradient(circle at 85% 10%, rgba(50,182,255,.12), transparent 26%);pointer-events:none}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 section{padding:78px 0}.section-title{max-width:860px;text-align:center;margin:0 auto 28px}.section-title h2{font-size:clamp(2rem, 4vw, 3.15rem);line-height:1.05;margin:0 0 12px;font-weight:900}.section-title p{margin:0;color:var(--muted);line-height:1.75}
@@ -69,6 +73,18 @@ section{padding:78px 0}.section-title{max-width:860px;text-align:center;margin:0
 .test-card{min-width:260px;max-width:260px;scroll-snap-align:start;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.10);background:#0a1018;flex:0 0 auto;box-shadow:0 18px 45px rgba(0,0,0,.35)}
 .test-card .frame{padding:10px;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02))}
 .test-card img{width:100%;height:460px;object-fit:cover;display:block;border-radius:18px}
+.testimonial-shot{width:100%;aspect-ratio:9/16;overflow:hidden;border-radius:18px;background:#fff}
+.testimonial-shot img{width:1000%;height:100%;max-width:none;object-fit:fill;display:block;border-radius:0}
+.testimonial-shot.shot-0 img{transform:translateX(0)}
+.testimonial-shot.shot-1 img{transform:translateX(-10%)}
+.testimonial-shot.shot-2 img{transform:translateX(-20%)}
+.testimonial-shot.shot-3 img{transform:translateX(-30%)}
+.testimonial-shot.shot-4 img{transform:translateX(-40%)}
+.testimonial-shot.shot-5 img{transform:translateX(-50%)}
+.testimonial-shot.shot-6 img{transform:translateX(-60%)}
+.testimonial-shot.shot-7 img{transform:translateX(-70%)}
+.testimonial-shot.shot-8 img{transform:translateX(-80%)}
+.testimonial-shot.shot-9 img{transform:translateX(-90%)}
 .carousel-controls{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:16px}
 .carousel-btn{width:48px;height:48px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;backdrop-filter: blur(10px);box-shadow:0 22px 70px rgba(0,0,0,.45);font-size:1.2rem}
 .dots{display:flex;gap:8px;justify-content:center}.dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.22);transition:.2s ease}.dot.active{background:var(--yellow);transform:scale(1.2)}
@@ -89,7 +105,7 @@ section{padding:78px 0}.section-title{max-width:860px;text-align:center;margin:0
 @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.035)}100%{transform:scale(1)}}
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}
 footer{padding:42px 0 110px;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,.08)}
-@media (max-width: 980px){.checkout-grid{grid-template-columns:1fr}.checkout-grid label:first-child{grid-column:auto}.whatsapp-support{bottom:88px;left:12px;padding:9px 12px}.hero{min-height:auto}.hero-grid,.grid-3,.stats,.included{grid-template-columns:1fr}.compare{grid-template-columns:1fr}.hero-media img{min-height:auto}.cta-row{flex-direction:column}.btn,.btn-ghost{width:100%}.floating-cta{left:16px;right:16px;min-width:auto}.test-card{min-width:78vw;max-width:300px}}
+@media (max-width: 980px){.checkout-grid{grid-template-columns:1fr}.checkout-grid label:first-child{grid-column:auto}.whatsapp-support{bottom:88px;left:12px;padding:9px 12px}.hero{min-height:auto}.hero-grid,.grid-3,.stats,.included{grid-template-columns:1fr}.compare{grid-template-columns:1fr}.hero-media img{min-height:auto}.hero-video{width:100%;height:auto;max-height:none}.cta-row{flex-direction:column}.btn,.btn-ghost{width:100%}.floating-cta{left:16px;right:16px;min-width:auto}.test-card{min-width:78vw;max-width:300px}}
 </style>
 </head>
 <body>
@@ -120,7 +136,15 @@ footer{padding:42px 0 110px;text-align:center;color:var(--muted);border-top:1px 
       </div>
       <div class="inline-alert">⚠️ Atenção: quando esse lote fechar, a oferta atual sai do ar.</div>
     </div>
-    <div class="hero-media reveal"><img src="assets/hero.jpg" alt="Preparatório SESAU Rondônia"></div>
+    <div class="hero-media reveal">
+      <div class="hero-video-shell">
+        <div class="hero-video-label">▶ VEJA A PLATAFORMA POR DENTRO</div>
+        <video class="hero-video" controls playsinline preload="metadata" poster="assets/hero.jpg" aria-label="Vídeo de apresentação do preparatório SESAU Rondônia">
+          <source src="assets/video-principal-sesau.mp4" type="video/mp4">
+          Seu navegador não conseguiu reproduzir o vídeo.
+        </video>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -181,26 +205,28 @@ footer{padding:42px 0 110px;text-align:center;color:var(--muted);border-top:1px 
   <div class="container">
     <div class="section-title reveal">
       <h2>Veja o que estão falando sobre o material</h2>
-      <p>Prova social com prints reais para aumentar a confiança e a conversão.</p>
+      <p>Veja alguns relatos, aprovações e avaliações compartilhados por alunos e clientes.</p>
     </div>
     <div class="testimonials-shell reveal">
       <div class="testimonials">
         <div class="test-track" id="testTrack">
-          <div class="test-card"><div class="frame"><img src="assets/depoimento_real_1.jpg" alt="Depoimento 1"></div></div>
-          <div class="test-card"><div class="frame"><img src="assets/depoimento_real_2.jpg" alt="Depoimento 2"></div></div>
-          <div class="test-card"><div class="frame"><img src="assets/depoimento_real_3.jpg" alt="Depoimento 3"></div></div>
-          <div class="test-card"><div class="frame"><img src="assets/depoimento_real_4.jpg" alt="Depoimento 4"></div></div>
-          <div class="test-card"><div class="frame"><img src="assets/depoimento_real_5.jpg" alt="Depoimento 5"></div></div>
+          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-0" role="img" aria-label="Relato de aprovação em três cargos"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
+          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-1" role="img" aria-label="Relato de aprovação em técnico de enfermagem"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
+          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-8" role="img" aria-label="Avaliações de alunos sobre mapas mentais e preparação"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
+          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-6" role="img" aria-label="Avaliações sobre organização do material"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
+          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-4" role="img" aria-label="Avaliações de clientes da plataforma"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
+          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-7" role="img" aria-label="Avaliações sobre acesso e material atualizado"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
+          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-9" role="img" aria-label="Avaliações sobre o acervo"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
+          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-5" role="img" aria-label="Avaliações sobre atendimento e recebimento"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
+          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-3" role="img" aria-label="Relato de estudante satisfeita"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
+          <div class="test-card"><div class="frame"><div class="testimonial-shot shot-2" role="img" aria-label="Mensagem elogiando atendimento e plataforma"><img src="assets/depoimentos-sprite.webp" alt=""></div></div></div>
         </div>
       </div>
       <div class="carousel-controls">
         <button class="carousel-btn" id="prevBtn" type="button" aria-label="Anterior">‹</button>
         <div class="dots" id="dots">
-          <div class="dot active"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
+          <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
         </div>
         <button class="carousel-btn" id="nextBtn" type="button" aria-label="Próximo">›</button>
       </div>
