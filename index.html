@@ -372,6 +372,16 @@ const pixCode = document.getElementById('pixCode');
 const pixStatus = document.getElementById('pixStatus');
 const copyPix = document.getElementById('copyPix');
 const accessPlatform = document.getElementById('accessPlatform');
+function jrNewCheckoutKey(){
+  if(window.crypto && typeof window.crypto.randomUUID==='function') return window.crypto.randomUUID();
+  const bytes=new Uint8Array(16);
+  window.crypto.getRandomValues(bytes);
+  bytes[6]=(bytes[6]&15)|64;
+  bytes[8]=(bytes[8]&63)|128;
+  const h=Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');
+  return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20);
+}
+let jrCheckoutKey = jrNewCheckoutKey();
 let jrCheckoutToken = '';
 let jrAccessToken = '';
 let jrPlatformUrl = '';
@@ -445,7 +455,8 @@ if(checkoutForm) checkoutForm.addEventListener('submit',async(event)=>{
   const payload={
     name:document.getElementById('checkoutName')?.value||'',
     email:document.getElementById('checkoutEmail')?.value||'',
-    cpf:document.getElementById('checkoutCpf')?.value||''
+    cpf:document.getElementById('checkoutCpf')?.value||'',
+    checkoutKey:jrCheckoutKey
   };
   checkoutSubmit.disabled=true;
   checkoutSubmit.textContent='GERANDO PIX...';
@@ -460,6 +471,7 @@ if(checkoutForm) checkoutForm.addEventListener('submit',async(event)=>{
     if(!response.ok) throw new Error(data.error||'Não foi possível gerar o Pix.');
     jrCheckoutToken=data.checkoutToken||'';
     if(!jrCheckoutToken) throw new Error('Checkout não retornou a confirmação necessária.');
+    if(cpfInput) cpfInput.value='';
     checkoutForm.hidden=true;
     pixBox.hidden=false;
     pixCode.value=data.qrCode||'';
