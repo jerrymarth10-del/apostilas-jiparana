@@ -377,6 +377,7 @@ const pixCode = document.getElementById('pixCode');
 const pixStatus = document.getElementById('pixStatus');
 const copyPix = document.getElementById('copyPix');
 const accessPlatform = document.getElementById('accessPlatform');
+const areaPicker = document.getElementById('areaPicker');
 const checkoutAreaInputs = Array.from(document.querySelectorAll('input[name="area"]'));
 function jrNewCheckoutKey(){
   if(window.crypto && typeof window.crypto.randomUUID==='function') return window.crypto.randomUUID();
@@ -405,6 +406,14 @@ try{
   if(remembered) remembered.checked=true;
 }catch(e){}
 const jrAreaKeyBound = true;
+
+function jrLockAreaSelection(areaName){
+  checkoutAreaInputs.forEach(function(input){input.disabled=true;});
+  if(!areaPicker) return;
+  areaPicker.setAttribute('aria-disabled','true');
+  const legend=areaPicker.querySelector('legend');
+  if(legend) legend.textContent='Área vinculada ao Pix: '+String(areaName||'selecionada');
+}
 
 function jrShowCheckoutError(message){
   if(!checkoutError) return;
@@ -492,6 +501,7 @@ if(checkoutForm) checkoutForm.addEventListener('submit',async(event)=>{
     if(!response.ok) throw new Error(data.error||'Não foi possível gerar o Pix.');
     jrCheckoutToken=data.checkoutToken||'';
     if(!jrCheckoutToken) throw new Error('Checkout não retornou a confirmação necessária.');
+    jrLockAreaSelection(data.areaName||selectedArea);
     if(cpfInput) cpfInput.value='';
     checkoutForm.hidden=true;
     pixBox.hidden=false;
