@@ -156,6 +156,18 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
   .reveal{transition:none!important;transform:none!important}
   .btn:hover,.btn-ghost:hover,.floating-cta:hover,.carousel-btn:hover{transform:none}
 }
+
+/* ===== Escolha da área SESAU ===== */
+.area-picker{border:0;margin:0 0 18px;padding:0;text-align:left}
+.area-picker legend{font-size:.9rem;font-weight:900;color:#173c56;margin-bottom:10px}
+.area-picker-note{margin:0 0 12px;color:#607286;font-size:.78rem;line-height:1.45}
+.area-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.area-option{position:relative;display:block;cursor:pointer}
+.area-option input{position:absolute;opacity:0;pointer-events:none}
+.area-option span{display:flex;align-items:center;min-height:48px;padding:11px 12px;border:1px solid #d6e3eb;border-radius:13px;background:#fff;color:#21435b;font-size:.78rem;font-weight:800;line-height:1.25;transition:.18s ease}
+.area-option input:checked + span{border-color:#0e8a7a;background:#e9f8f4;color:#075f55;box-shadow:0 0 0 3px rgba(14,138,122,.10)}
+.area-option input:focus-visible + span{outline:3px solid rgba(47,128,237,.22);outline-offset:2px}
+@media(max-width:620px){.area-options{grid-template-columns:1fr}.area-option span{min-height:45px}}
 </style>
 </head>
 <body>
@@ -285,6 +297,27 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
           <strong>Pagamento seguro via Pix</strong>
           <span>Mercado Pago</span>
         </div>
+
+          <fieldset class="area-picker" id="areaPicker">
+            <legend>1. Escolha a sua área de preparação</legend>
+            <p class="area-picker-note">O acesso liberado após o pagamento será referente à área selecionada abaixo.</p>
+            <div class="area-options">
+              <label class="area-option"><input type="radio" name="area" value="enfermagem"><span>Enfermagem</span></label>
+              <label class="area-option"><input type="radio" name="area" value="tecnico"><span>Técnico em Enfermagem</span></label>
+              <label class="area-option"><input type="radio" name="area" value="radiologia"><span>Radiologia</span></label>
+              <label class="area-option"><input type="radio" name="area" value="nutricao"><span>Nutrição</span></label>
+              <label class="area-option"><input type="radio" name="area" value="farmaceutico"><span>Farmácia</span></label>
+              <label class="area-option"><input type="radio" name="area" value="odontologia"><span>Odontologia</span></label>
+              <label class="area-option"><input type="radio" name="area" value="fisioterapia"><span>Fisioterapia</span></label>
+              <label class="area-option"><input type="radio" name="area" value="laboratorio"><span>Técnico de Laboratório</span></label>
+              <label class="area-option"><input type="radio" name="area" value="biomedicina"><span>Biomedicina</span></label>
+              <label class="area-option"><input type="radio" name="area" value="psicologia"><span>Psicologia</span></label>
+              <label class="area-option"><input type="radio" name="area" value="acsfiscal"><span>Agente de Saúde e Fiscal Sanitário</span></label>
+              <label class="area-option"><input type="radio" name="area" value="clinico"><span>Clínico Geral Medicina</span></label>
+              <label class="area-option"><input type="radio" name="area" value="educacaofisica"><span>Educação Física</span></label>
+            </div>
+          </fieldset>
+
         <form id="checkoutForm" novalidate>
           <div class="checkout-grid">
             <label>Nome completo<input id="checkoutName" name="name" autocomplete="name" placeholder="Seu nome completo" required></label>
@@ -344,6 +377,7 @@ const pixCode = document.getElementById('pixCode');
 const pixStatus = document.getElementById('pixStatus');
 const copyPix = document.getElementById('copyPix');
 const accessPlatform = document.getElementById('accessPlatform');
+const checkoutAreaInputs = Array.from(document.querySelectorAll('input[name="area"]'));
 function jrNewCheckoutKey(){
   if(window.crypto && typeof window.crypto.randomUUID==='function') return window.crypto.randomUUID();
   const bytes=new Uint8Array(16);
@@ -359,6 +393,18 @@ let jrAccessToken = '';
 let jrPlatformUrl = '';
 let jrPollTimer = null;
 let jrRedirecting = false;
+checkoutAreaInputs.forEach(function(input){
+  input.addEventListener('change',function(){
+    jrCheckoutKey=jrNewCheckoutKey();
+    try{sessionStorage.setItem('jr_selected_sesau_area',input.value);}catch(e){}
+  });
+});
+try{
+  const rememberedArea=sessionStorage.getItem('jr_selected_sesau_area')||'';
+  const remembered=checkoutAreaInputs.find(function(input){return input.value===rememberedArea;});
+  if(remembered) remembered.checked=true;
+}catch(e){}
+const jrAreaKeyBound = true;
 
 function jrShowCheckoutError(message){
   if(!checkoutError) return;
@@ -424,10 +470,13 @@ if(checkoutForm) checkoutForm.addEventListener('submit',async(event)=>{
   event.preventDefault();
   if(checkoutError) checkoutError.hidden=true;
   if(!document.getElementById('checkoutConsent')?.checked){jrShowCheckoutError('Confirme seus dados para gerar o Pix.');return;}
+  const selectedArea=document.querySelector('input[name="area"]:checked')?.value||'';
+  if(!selectedArea){jrShowCheckoutError('Escolha a sua área de preparação antes de gerar o Pix.');return;}
   const payload={
     name:document.getElementById('checkoutName')?.value||'',
     email:document.getElementById('checkoutEmail')?.value||'',
     cpf:document.getElementById('checkoutCpf')?.value||'',
+    area:selectedArea,
     checkoutKey:jrCheckoutKey
   };
   checkoutSubmit.disabled=true;
