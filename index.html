@@ -540,47 +540,6 @@ track.addEventListener('scroll', ()=>{
 
 startAuto();
 
-const materialTrack = document.getElementById('materialTrack');
-if(materialTrack){
-  const materialDots = Array.from(document.querySelectorAll('#materialDots .dot'));
-  const materialCards = Array.from(materialTrack.querySelectorAll('.test-card'));
-  const materialPrevBtn = document.getElementById('materialPrevBtn');
-  const materialNextBtn = document.getElementById('materialNextBtn');
-  let materialCurrent = 0;
-  let materialPaused = false;
-  let materialTimer = null;
-  function updateMaterialDots(index){ materialDots.forEach((d,i)=>d.classList.toggle('active', i===index)); }
-  function goToMaterial(index){
-    if(!materialCards.length) return;
-    materialCurrent = (index + materialCards.length) % materialCards.length;
-    const card = materialCards[materialCurrent];
-    materialTrack.scrollTo({ left: card.offsetLeft - materialTrack.offsetLeft, behavior: 'smooth' });
-    updateMaterialDots(materialCurrent);
-  }
-  function startMaterialAuto(){
-    if(materialTimer) clearInterval(materialTimer);
-    if(reduceMotion) return;
-    materialTimer = setInterval(()=>{ if(!materialPaused && materialCards.length > 1) goToMaterial(materialCurrent + 1); }, 4200);
-  }
-  if(materialPrevBtn) materialPrevBtn.addEventListener('click', ()=>goToMaterial(materialCurrent - 1));
-  if(materialNextBtn) materialNextBtn.addEventListener('click', ()=>goToMaterial(materialCurrent + 1));
-  materialTrack.addEventListener('mouseenter', ()=> materialPaused = true);
-  materialTrack.addEventListener('mouseleave', ()=> materialPaused = false);
-  materialTrack.addEventListener('touchstart', ()=> materialPaused = true, {passive:true});
-  materialTrack.addEventListener('touchend', ()=> setTimeout(()=> materialPaused = false, 1200), {passive:true});
-  materialTrack.addEventListener('scroll', ()=>{
-    const center = materialTrack.scrollLeft + materialTrack.clientWidth / 2;
-    let best = 0, bestDist = Infinity;
-    materialCards.forEach((card, i)=>{
-      const cardCenter = card.offsetLeft + card.clientWidth / 2;
-      const dist = Math.abs(center - cardCenter);
-      if(dist < bestDist){ bestDist = dist; best = i; }
-    });
-    materialCurrent = best;
-    updateMaterialDots(best);
-  }, {passive:true});
-  startMaterialAuto();
-}
 </script>
 </body>
 </html>
