@@ -4,21 +4,39 @@ function noStore(res){
   res.setHeader("Cache-Control","no-store, max-age=0");
   res.setHeader("Pragma","no-cache");
   res.setHeader("X-Content-Type-Options","nosniff");
+  res.setHeader("Referrer-Policy","no-referrer");
 }
 
-function requestOrigin(req){
-  const host=String(req.headers["x-forwarded-host"]||req.headers.host||"").trim();
-  return host ? "https://"+host : "https://apostilas-jiparana-xrse.vercel.app";
+function clientIp(req){
+  const raw=String(req.headers["x-forwarded-for"]||"").split(",")[0].trim() || String(req.headers["x-real-ip"]||"").trim();
+  return raw.length<=64 && /^[0-9a-fA-F:.]+$/.test(raw) ? raw : "unknown";
+}
+
+function serviceToken(){
+  const token=String(process.env.VERCEL_OIDC_TOKEN||"").trim();
+  if(!token && String(process.env.VERCEL_ENV||"").toLowerCase()==="production"){
+    throw new Error("Identidade interna da Vercel indisponível.");
+  }
+  return token;
 }
 
 module.exports=async function handler(req,res){
   noStore(res);
   if(req.method!=="POST"){res.setHeader("Allow","POST");return res.status(405).json({error:"Método não permitido."});}
+  const length=Number(req.headers["content-length"]||0);
+  if(length>12288) return res.status(413).json({error:"Requisição muito grande."});
+  const contentType=String(req.headers["content-type"]||"").toLowerCase();
+  if(contentType && !contentType.startsWith("application/json")) return res.status(415).json({error:"Formato de requisição inválido."});
+
   try{
     const body=typeof req.body==="string"?JSON.parse(req.body||"{}"):(req.body||{});
+    const checkoutToken=String(body.checkoutToken||"");
+    if(!checkoutToken || checkoutToken.length>8192) return res.status(400).json({error:"Checkout inválido."});
+
     const controller=new AbortController();
     const timer=setTimeout(()=>controller.abort(),15000);
     try{
+      const token=serviceToken();
       const response=await fetch(API_BASE+"/status",{
         method:"POST",
         cache:"no-store",
@@ -26,9 +44,10 @@ module.exports=async function handler(req,res){
         headers:{
           "Content-Type":"application/json",
           "Accept":"application/json",
-          "Origin":requestOrigin(req)
+          ...(token?{"Authorization":"Bearer "+token}:{}),
+          "X-JR-Client-IP":clientIp(req)
         },
-        body:JSON.stringify({checkoutToken:body.checkoutToken||""})
+        body:JSON.stringify({checkoutToken})
       });
       const data=await response.json().catch(()=>({error:"Resposta inválida do servidor de pagamento."}));
       return res.status(response.status).json(data);
