@@ -76,6 +76,12 @@ section{padding:78px 0}.section-title{max-width:860px;text-align:center;margin:0
 .strike{color:var(--muted);text-decoration:line-through;font-size:1.1rem}.price{font-family:Anton, Inter, sans-serif;font-size:clamp(3.3rem, 9vw, 6rem);line-height:.95;color:var(--yellow);margin:10px 0 6px;text-shadow:0 12px 34px rgba(255,210,63,.18)}.subprice{color:#fff;font-weight:800;margin-bottom:18px}
 .included{margin:22px 0 24px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;text-align:left}.included .item{padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-weight:800}
 .faq{display:grid;gap:16px;max-width:920px;margin:0 auto}
+.checkout-card{width:min(100%,650px);margin:26px auto 0;text-align:left;border:1px solid rgba(255,255,255,.12);background:#0a1018;border-radius:24px;padding:20px;box-shadow:0 24px 70px rgba(0,0,0,.38)}
+.checkout-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.checkout-head strong{font-size:1.05rem}.checkout-head span{font-size:.78rem;font-weight:900;color:#8ee7bb;background:rgba(37,211,102,.10);border:1px solid rgba(37,211,102,.25);padding:7px 10px;border-radius:999px}
+.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.checkout-grid label:first-child{grid-column:1/-1}.checkout-grid label,.pix-copy-label{display:grid;gap:7px;color:#dce5f4;font-size:.82rem;font-weight:800}.checkout-grid input,.pix-copy-label textarea{width:100%;border:1px solid rgba(255,255,255,.13);background:#070c13;color:#fff;border-radius:13px;padding:13px 14px;outline:none}.checkout-grid input:focus,.pix-copy-label textarea:focus{border-color:#7d5cff;box-shadow:0 0 0 3px rgba(125,92,255,.13)}
+.checkout-consent{display:flex;gap:9px;align-items:flex-start;margin:14px 0;color:#aab3c6;font-size:.8rem;line-height:1.5}.checkout-consent input{margin-top:3px;accent-color:#7d5cff}.checkout-submit{width:100%;border:0}.checkout-error{margin-top:12px;padding:11px 12px;border-radius:12px;background:rgba(255,42,42,.12);border:1px solid rgba(255,42,42,.25);color:#ffd8d8;font-size:.86rem;font-weight:700}
+.pix-box{text-align:center}.pix-status{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;background:rgba(255,210,63,.09);border:1px solid rgba(255,210,63,.20);color:#ffe78c;font-size:.86rem;font-weight:900;margin-bottom:14px}.status-dot{width:9px;height:9px;border-radius:50%;background:#ffd23f;box-shadow:0 0 0 5px rgba(255,210,63,.10);animation:pulse 1.4s infinite}.pix-box.approved .status-dot{background:#25D366;box-shadow:0 0 0 5px rgba(37,211,102,.10)}
+#pixQr{width:230px;height:230px;object-fit:contain;background:#fff;padding:8px;border-radius:16px;margin:0 auto 14px}.pix-copy-label{text-align:left}.pix-copy-label textarea{resize:none;font-size:.75rem;line-height:1.45;word-break:break-all}.copy-pix{width:100%;margin-top:10px;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.06);color:#fff;font-weight:900}.pix-help{color:#aab3c6;font-size:.8rem;line-height:1.55;margin:12px 0 0}.access-platform{width:100%;margin-top:14px;background:linear-gradient(180deg,#2ed573,#159447);box-shadow:0 18px 44px rgba(37,211,102,.22);border:0}
 .whatsapp-support{position:fixed;z-index:260;left:16px;bottom:16px;display:flex;align-items:center;gap:10px;padding:11px 15px;border-radius:999px;background:#25D366;color:#fff;border:1px solid rgba(255,255,255,.35);box-shadow:0 16px 38px rgba(0,0,0,.32);font-weight:900}
 .whatsapp-support .wa-icon{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.18);font-size:16px}
 .whatsapp-support span:last-child{display:grid;line-height:1.05}.whatsapp-support small{font-size:10px;font-weight:700;opacity:.9;margin-top:3px}
@@ -83,7 +89,7 @@ section{padding:78px 0}.section-title{max-width:860px;text-align:center;margin:0
 @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.035)}100%{transform:scale(1)}}
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}
 footer{padding:42px 0 110px;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,.08)}
-@media (max-width: 980px){.whatsapp-support{bottom:88px;left:12px;padding:9px 12px}.hero{min-height:auto}.hero-grid,.grid-3,.stats,.included{grid-template-columns:1fr}.compare{grid-template-columns:1fr}.hero-media img{min-height:auto}.cta-row{flex-direction:column}.btn,.btn-ghost{width:100%}.floating-cta{left:16px;right:16px;min-width:auto}.test-card{min-width:78vw;max-width:300px}}
+@media (max-width: 980px){.checkout-grid{grid-template-columns:1fr}.checkout-grid label:first-child{grid-column:auto}.whatsapp-support{bottom:88px;left:12px;padding:9px 12px}.hero{min-height:auto}.hero-grid,.grid-3,.stats,.included{grid-template-columns:1fr}.compare{grid-template-columns:1fr}.hero-media img{min-height:auto}.cta-row{flex-direction:column}.btn,.btn-ghost{width:100%}.floating-cta{left:16px;right:16px;min-width:auto}.test-card{min-width:78vw;max-width:300px}}
 </style>
 </head>
 <body>
@@ -252,7 +258,33 @@ footer{padding:42px 0 110px;text-align:center;color:var(--muted);border-top:1px 
         <div class="item">✅ Videoaulas</div>
         <div class="item">✅ Material digital e muito mais</div>
       </div>
-      <a class="btn" href="#comprar" style="width:min(100%,560px)">GARANTIR MEU MATERIAL DA SESAU</a>
+      <div class="checkout-card" id="checkoutCard">
+        <div class="checkout-head">
+          <strong>Pagamento seguro via Pix</strong>
+          <span>Mercado Pago</span>
+        </div>
+        <form id="checkoutForm" novalidate>
+          <div class="checkout-grid">
+            <label>Nome completo<input id="checkoutName" name="name" autocomplete="name" placeholder="Seu nome completo" required></label>
+            <label>E-mail<input id="checkoutEmail" name="email" type="email" autocomplete="email" inputmode="email" placeholder="voce@email.com" required></label>
+            <label>CPF<input id="checkoutCpf" name="cpf" inputmode="numeric" autocomplete="off" maxlength="14" placeholder="000.000.000-00" required></label>
+          </div>
+          <label class="checkout-consent"><input id="checkoutConsent" type="checkbox" required> <span>Confirmo meus dados e quero gerar o Pix de R$ 129,90.</span></label>
+          <button class="btn checkout-submit" id="checkoutSubmit" type="submit">GERAR PIX E GARANTIR ACESSO</button>
+          <div class="checkout-error" id="checkoutError" role="alert" hidden></div>
+        </form>
+
+        <div class="pix-box" id="pixBox" hidden>
+          <div class="pix-status" id="pixStatus"><span class="status-dot"></span> Aguardando pagamento...</div>
+          <img id="pixQr" alt="QR Code Pix do Mercado Pago" hidden>
+          <label class="pix-copy-label">Pix Copia e Cola
+            <textarea id="pixCode" readonly rows="3"></textarea>
+          </label>
+          <button class="copy-pix" id="copyPix" type="button">COPIAR CÓDIGO PIX</button>
+          <p class="pix-help">Depois de pagar, esta página confirma o pagamento automaticamente e abre sua plataforma SESAU.</p>
+          <button class="btn access-platform" id="accessPlatform" type="button" hidden>ENTRAR NA PLATAFORMA SESAU</button>
+        </div>
+      </div>
       <p style="color:var(--muted); margin:16px 0 0; line-height:1.7">jr apostilas agradece.</p>
     </div>
   </div>
@@ -281,6 +313,117 @@ footer{padding:42px 0 110px;text-align:center;color:var(--muted);border-top:1px 
 
 
 <script>
+const checkoutForm = document.getElementById('checkoutForm');
+const checkoutError = document.getElementById('checkoutError');
+const checkoutSubmit = document.getElementById('checkoutSubmit');
+const pixBox = document.getElementById('pixBox');
+const pixQr = document.getElementById('pixQr');
+const pixCode = document.getElementById('pixCode');
+const pixStatus = document.getElementById('pixStatus');
+const copyPix = document.getElementById('copyPix');
+const accessPlatform = document.getElementById('accessPlatform');
+let jrCheckoutToken = '';
+let jrAccessToken = '';
+let jrPlatformUrl = '';
+let jrPollTimer = null;
+let jrRedirecting = false;
+
+function jrShowCheckoutError(message){
+  if(!checkoutError) return;
+  checkoutError.textContent = message || 'Não foi possível continuar agora.';
+  checkoutError.hidden = false;
+}
+function jrCpfMask(value){
+  return String(value||'').replace(/\D/g,'').slice(0,11)
+    .replace(/(\d{3})(\d)/,'$1.$2')
+    .replace(/(\d{3})(\d)/,'$1.$2')
+    .replace(/(\d{3})(\d{1,2})$/,'$1-$2');
+}
+const cpfInput=document.getElementById('checkoutCpf');
+if(cpfInput) cpfInput.addEventListener('input',()=>{cpfInput.value=jrCpfMask(cpfInput.value);});
+
+function jrOpenPlatform(){
+  if(jrRedirecting || !jrAccessToken || !jrPlatformUrl) return;
+  jrRedirecting = true;
+  const form=document.createElement('form');
+  form.method='POST';
+  form.action=jrPlatformUrl.replace(/\/$/,'')+'/api/purchase-entry';
+  form.style.display='none';
+  const input=document.createElement('input');
+  input.type='hidden'; input.name='token'; input.value=jrAccessToken;
+  form.appendChild(input); document.body.appendChild(form); form.submit();
+}
+if(accessPlatform) accessPlatform.addEventListener('click',jrOpenPlatform);
+
+async function jrCheckPayment(){
+  if(!jrCheckoutToken) return;
+  try{
+    const response=await fetch('/api/payment-status',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      cache:'no-store',
+      body:JSON.stringify({checkoutToken:jrCheckoutToken})
+    });
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok) return;
+    if(data.approved){
+      if(jrPollTimer){clearInterval(jrPollTimer);jrPollTimer=null;}
+      jrAccessToken=data.accessToken||'';
+      jrPlatformUrl=data.platformUrl||'';
+      if(pixBox) pixBox.classList.add('approved');
+      if(pixStatus) pixStatus.innerHTML='<span class="status-dot"></span> Pagamento aprovado! Abrindo sua plataforma...';
+      if(accessPlatform) accessPlatform.hidden=false;
+      setTimeout(jrOpenPlatform,1200);
+    }else if(pixStatus){
+      const label=String(data.status||'pending').toLowerCase()==='pending'?'Aguardando pagamento...':'Confirmando pagamento...';
+      pixStatus.innerHTML='<span class="status-dot"></span> '+label;
+    }
+  }catch(e){}
+}
+
+if(copyPix) copyPix.addEventListener('click',async()=>{
+  const code=pixCode?.value||'';
+  if(!code) return;
+  try{await navigator.clipboard.writeText(code);copyPix.textContent='PIX COPIADO ✓';setTimeout(()=>copyPix.textContent='COPIAR CÓDIGO PIX',1800);}
+  catch{pixCode.focus();pixCode.select();document.execCommand('copy');}
+});
+
+if(checkoutForm) checkoutForm.addEventListener('submit',async(event)=>{
+  event.preventDefault();
+  if(checkoutError) checkoutError.hidden=true;
+  if(!document.getElementById('checkoutConsent')?.checked){jrShowCheckoutError('Confirme seus dados para gerar o Pix.');return;}
+  const payload={
+    name:document.getElementById('checkoutName')?.value||'',
+    email:document.getElementById('checkoutEmail')?.value||'',
+    cpf:document.getElementById('checkoutCpf')?.value||''
+  };
+  checkoutSubmit.disabled=true;
+  checkoutSubmit.textContent='GERANDO PIX...';
+  try{
+    const response=await fetch('/api/checkout',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      cache:'no-store',
+      body:JSON.stringify(payload)
+    });
+    const data=await response.json().catch(()=>({}));
+    if(!response.ok) throw new Error(data.error||'Não foi possível gerar o Pix.');
+    jrCheckoutToken=data.checkoutToken||'';
+    if(!jrCheckoutToken) throw new Error('Checkout não retornou a confirmação necessária.');
+    checkoutForm.hidden=true;
+    pixBox.hidden=false;
+    pixCode.value=data.qrCode||'';
+    if(data.qrCodeBase64){pixQr.src='data:image/png;base64,'+data.qrCodeBase64;pixQr.hidden=false;}
+    pixBox.scrollIntoView({behavior:'smooth',block:'center'});
+    jrPollTimer=setInterval(jrCheckPayment,3000);
+    jrCheckPayment();
+  }catch(error){
+    jrShowCheckoutError(error?.message||'Não foi possível gerar o Pix.');
+    checkoutSubmit.disabled=false;
+    checkoutSubmit.textContent='GERAR PIX E GARANTIR ACESSO';
+  }
+});
+
 async function setLocationBar(){
   const el = document.getElementById('locationBar');
   if(!el) return;
