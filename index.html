@@ -75,7 +75,7 @@ section{padding:78px 0}.section-title{max-width:860px;text-align:center;margin:0
 .checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.checkout-grid label:first-child{grid-column:1/-1}.checkout-grid label,.pix-copy-label{display:grid;gap:7px;color:#dce5f4;font-size:.82rem;font-weight:800}.checkout-grid input,.pix-copy-label textarea{width:100%;border:1px solid rgba(255,255,255,.13);background:#070c13;color:#fff;border-radius:13px;padding:13px 14px;outline:none}.checkout-grid input:focus,.pix-copy-label textarea:focus{border-color:#7d5cff;box-shadow:0 0 0 3px rgba(125,92,255,.13)}
 .checkout-consent{display:flex;gap:9px;align-items:flex-start;margin:14px 0;color:#aab3c6;font-size:.8rem;line-height:1.5}.checkout-consent input{margin-top:3px;accent-color:#7d5cff}.checkout-submit{width:100%;border:0}.checkout-error{margin-top:12px;padding:11px 12px;border-radius:12px;background:rgba(255,42,42,.12);border:1px solid rgba(255,42,42,.25);color:#ffd8d8;font-size:.86rem;font-weight:700}
 .pix-box{text-align:center}.pix-status{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;background:rgba(255,210,63,.09);border:1px solid rgba(255,210,63,.20);color:#ffe78c;font-size:.86rem;font-weight:900;margin-bottom:14px}.status-dot{width:9px;height:9px;border-radius:50%;background:#ffd23f;box-shadow:0 0 0 5px rgba(255,210,63,.10);animation:pulse 1.4s infinite}.pix-box.approved .status-dot{background:#25D366;box-shadow:0 0 0 5px rgba(37,211,102,.10)}
-#pixQr{width:230px;height:230px;object-fit:contain;background:#fff;padding:8px;border-radius:16px;margin:0 auto 14px}.pix-copy-label{text-align:left}.pix-copy-label textarea{resize:none;font-size:.75rem;line-height:1.45;word-break:break-all}.copy-pix{width:100%;margin-top:10px;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.06);color:#fff;font-weight:900}.pix-help{color:#aab3c6;font-size:.8rem;line-height:1.55;margin:12px 0 0}.access-platform{width:100%;margin-top:14px;background:linear-gradient(180deg,#2ed573,#159447);box-shadow:0 18px 44px rgba(37,211,102,.22);border:0}
+#pixQr{width:230px;height:230px;object-fit:contain;background:#fff;padding:8px;border-radius:16px;margin:0 auto 14px}.pix-copy-label{text-align:left}.pix-code-wrap{position:relative}.pix-copy-label textarea{resize:none;font-size:.75rem;line-height:1.45;word-break:break-all;padding-right:58px}.pix-copy-icon{position:absolute;right:9px;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:11px;border:1px solid rgba(255,255,255,.18);background:#fff;color:#111827;display:grid;place-items:center;cursor:pointer;font-size:19px;font-weight:900;box-shadow:0 8px 18px rgba(0,0,0,.25)}.pix-copy-icon.copied{background:#25D366;color:#fff;border-color:#25D366}.copy-pix{width:100%;margin-top:12px;padding:15px 14px;border-radius:13px;border:0;background:linear-gradient(180deg,#25D366,#159447);color:#fff;font-weight:1000;box-shadow:0 14px 32px rgba(37,211,102,.22);cursor:pointer;font-size:.95rem}.pix-help{color:#aab3c6;font-size:.8rem;line-height:1.55;margin:12px 0 0}.access-platform{width:100%;margin-top:14px;background:linear-gradient(180deg,#2ed573,#159447);box-shadow:0 18px 44px rgba(37,211,102,.22);border:0}
 .whatsapp-support{position:fixed;z-index:260;left:16px;bottom:16px;display:flex;align-items:center;gap:10px;padding:11px 15px;border-radius:999px;background:#25D366;color:#fff;border:1px solid rgba(255,255,255,.35);box-shadow:0 16px 38px rgba(0,0,0,.32);font-weight:900}
 .whatsapp-support .wa-icon{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.18);font-size:16px}
 .whatsapp-support span:last-child{display:grid;line-height:1.05}.whatsapp-support small{font-size:10px;font-weight:700;opacity:.9;margin-top:3px}
@@ -333,9 +333,12 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
           <div class="pix-status" id="pixStatus" aria-live="polite"><span class="status-dot"></span> Aguardando pagamento...</div>
           <img id="pixQr" alt="QR Code Pix do Mercado Pago" hidden>
           <label class="pix-copy-label">Pix Copia e Cola
-            <textarea id="pixCode" readonly rows="3"></textarea>
+            <div class="pix-code-wrap">
+              <textarea id="pixCode" readonly rows="3"></textarea>
+              <button class="pix-copy-icon" id="copyPixIcon" type="button" aria-label="Copiar código Pix" title="Copiar código Pix">⧉</button>
+            </div>
           </label>
-          <button class="copy-pix" id="copyPix" type="button">COPIAR CÓDIGO PIX</button>
+          <button class="copy-pix" id="copyPix" type="button">📋 COPIAR CÓDIGO PIX</button>
           <p class="pix-help">Depois de pagar, esta página confirma o pagamento automaticamente e abre sua plataforma SESAU.</p>
           <button class="btn access-platform" id="accessPlatform" type="button" hidden>ENTRAR NA PLATAFORMA SESAU</button>
         </div>
@@ -374,6 +377,7 @@ const checkoutSubmit = document.getElementById('checkoutSubmit');
 const pixBox = document.getElementById('pixBox');
 const pixQr = document.getElementById('pixQr');
 const pixCode = document.getElementById('pixCode');
+const copyPixIcon = document.getElementById('copyPixIcon');
 const pixStatus = document.getElementById('pixStatus');
 const copyPix = document.getElementById('copyPix');
 const accessPlatform = document.getElementById('accessPlatform');
@@ -468,12 +472,20 @@ async function jrCheckPayment(){
   }catch(e){}
 }
 
-if(copyPix) copyPix.addEventListener('click',async()=>{
+async function jrCopyPixCode(){
   const code=pixCode?.value||'';
   if(!code) return;
-  try{await navigator.clipboard.writeText(code);copyPix.textContent='PIX COPIADO ✓';setTimeout(()=>copyPix.textContent='COPIAR CÓDIGO PIX',1800);}
+  try{await navigator.clipboard.writeText(code);}
   catch{pixCode.focus();pixCode.select();document.execCommand('copy');}
-});
+  if(copyPix) copyPix.textContent='✓ PIX COPIADO';
+  if(copyPixIcon){copyPixIcon.textContent='✓';copyPixIcon.classList.add('copied');}
+  setTimeout(()=>{
+    if(copyPix) copyPix.textContent='📋 COPIAR CÓDIGO PIX';
+    if(copyPixIcon){copyPixIcon.textContent='⧉';copyPixIcon.classList.remove('copied');}
+  },2200);
+}
+if(copyPix) copyPix.addEventListener('click',jrCopyPixCode);
+if(copyPixIcon) copyPixIcon.addEventListener('click',jrCopyPixCode);
 
 if(checkoutForm) checkoutForm.addEventListener('submit',async(event)=>{
   event.preventDefault();
