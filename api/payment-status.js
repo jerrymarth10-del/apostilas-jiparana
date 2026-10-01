@@ -34,8 +34,9 @@ module.exports=async function handler(req,res){
     const checkoutToken=String(body.checkoutToken||"");
     const email=String(body.email||"").trim().toLowerCase();
     const paymentId=String(body.paymentId||"").trim();
+    const cpf=String(body.cpf||"").trim();
     if(!recover && (!checkoutToken || checkoutToken.length>8192)) return res.status(400).json({error:"Checkout inválido."});
-    if(recover && (!email || !paymentId)) return res.status(400).json({error:"Informe o e-mail e o identificador do pagamento."});
+    if(recover && (!email || !paymentId || !cpf)) return res.status(400).json({error:"Informe o e-mail e o identificador do pagamento."});
 
     const controller=new AbortController();
     const timer=setTimeout(()=>controller.abort(),15000);
@@ -51,7 +52,7 @@ module.exports=async function handler(req,res){
           ...(token?{"Authorization":"Bearer "+token}:{}),
           "X-JR-Client-IP":clientIp(req)
         },
-        body:JSON.stringify(recover?{recover:true,email,paymentId}:{checkoutToken})
+        body:JSON.stringify(recover?{recover:true,email,paymentId,cpf}:{checkoutToken,paymentId})
       });
       const data=await response.json().catch(()=>({error:"Resposta inválida do servidor de pagamento."}));
       return res.status(response.status).json(data);

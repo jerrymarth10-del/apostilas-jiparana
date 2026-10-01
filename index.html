@@ -332,6 +332,7 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
         <div class="recover-box" id="recoverBox" hidden>
           <p class="recover-note">Use o mesmo e-mail da compra e o identificador numérico que aparece no comprovante Pix (ex.: mpqrinter123456 → informe 123456).</p>
           <label>E-mail da compra<input id="recoverEmail" type="email" autocomplete="email" inputmode="email" placeholder="voce@email.com"></label>
+          <label>CPF da compra<input id="recoverCpf" inputmode="numeric" autocomplete="off" maxlength="14" placeholder="000.000.000-00"></label>
           <label>Identificador do pagamento<input id="recoverPaymentId" inputmode="numeric" autocomplete="off" placeholder="Somente números"></label>
           <button class="recover-submit" id="recoverSubmit" type="button">LIBERAR MEU ACESSO</button>
           <div class="checkout-error" id="recoverError" role="alert" hidden></div>
@@ -395,6 +396,7 @@ const recoverToggle=document.getElementById('recoverToggle');
 const recoverBox=document.getElementById('recoverBox');
 const recoverEmail=document.getElementById('recoverEmail');
 const recoverPaymentId=document.getElementById('recoverPaymentId');
+const recoverCpf=document.getElementById('recoverCpf');
 const recoverSubmit=document.getElementById('recoverSubmit');
 const recoverError=document.getElementById('recoverError');
 const JR_PENDING_KEY='jr_sesau_pending_checkout_v1';
@@ -562,13 +564,14 @@ if(recoverSubmit) recoverSubmit.addEventListener('click',async()=>{
   if(recoverError) recoverError.hidden=true;
   const email=String(recoverEmail?.value||'').trim();
   const paymentId=String(recoverPaymentId?.value||'').trim();
-  if(!email || !paymentId){
-    if(recoverError){recoverError.textContent='Informe o e-mail da compra e o identificador do pagamento.';recoverError.hidden=false;}
+  const cpf=String(recoverCpf?.value||'').trim();
+  if(!email || !paymentId || !cpf){
+    if(recoverError){recoverError.textContent='Informe o e-mail, CPF e identificador do pagamento.';recoverError.hidden=false;}
     return;
   }
   recoverSubmit.disabled=true;recoverSubmit.textContent='CONFIRMANDO PAGAMENTO...';
   try{
-    const r=await fetch('/api/payment-status',{method:'POST',headers:{'Content-Type':'application/json'},cache:'no-store',body:JSON.stringify({recover:true,email,paymentId})});
+    const r=await fetch('/api/payment-status',{method:'POST',headers:{'Content-Type':'application/json'},cache:'no-store',body:JSON.stringify({recover:true,email,paymentId,cpf})});
     const d=await r.json().catch(()=>({}));
     if(!r.ok) throw new Error(d.error||'Não foi possível recuperar o acesso.');
     if(!d.approved) throw new Error('O pagamento ainda não aparece como aprovado.');
@@ -685,7 +688,8 @@ track.addEventListener('scroll', ()=>{
 startAuto();
 
 </script>
-\n</body>
+\n<script src="/card-payment.js" defer></script>
+</body>
 </html>
 
 <!-- redeploy-trigger-2026-09-30-0701 -->
