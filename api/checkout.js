@@ -39,7 +39,8 @@ async function proxyPost(path,payload,req){
         "Content-Type":"application/json",
         "Accept":"application/json",
         ...(token?{"Authorization":"Bearer "+token}:{}),
-        "X-JR-Client-IP":clientIp(req)
+        "X-JR-Client-IP":clientIp(req),
+        "X-JR-User-Agent":String(req.headers["user-agent"]||"").slice(0,512)
       },
       body:JSON.stringify(payload)
     });
@@ -65,7 +66,9 @@ module.exports=async function handler(req,res){
       cpf:body.cpf,
       area:body.area,
       paymentMethod:body.paymentMethod,
-      checkoutKey
+      checkoutKey,
+      termsAccepted:body.termsAccepted===true,
+      termsVersion:String(body.termsVersion||"").slice(0,80)
     },req);
     return res.status(out.status).json(out.data);
   }catch(err){

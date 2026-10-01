@@ -324,7 +324,7 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
             <label>E-mail<input id="checkoutEmail" name="email" type="email" autocomplete="email" inputmode="email" placeholder="voce@email.com" required></label>
             <label>CPF<input id="checkoutCpf" name="cpf" inputmode="numeric" autocomplete="off" maxlength="14" placeholder="000.000.000-00" required></label>
           </div>
-          <label class="checkout-consent"><input id="checkoutConsent" type="checkbox" required> <span>Confirmo meus dados e quero continuar com o pagamento de R$ 129,90.</span></label>
+          <label class="checkout-consent"><input id="checkoutConsent" type="checkbox" required> <span><strong>Li e estou ciente:</strong> estou adquirindo um preparatório <strong>100% digital/online</strong>, sem envio de produto físico. O acesso será liberado após a confirmação do pagamento para a área selecionada. Li e aceito o <a href="/termos-aquisicao-digital.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;font-weight:800">Termo de Aquisição de Conteúdo Digital</a>.</span></label><p style="margin:8px 0 14px;font-size:.76rem;line-height:1.45;opacity:.78">Seu aceite é registrado com a versão do termo, data/hora, pedido e evidências técnicas de segurança.</p>
           <button class="btn checkout-submit" id="checkoutSubmit" type="submit">GERAR PIX E GARANTIR ACESSO</button>
           <div class="checkout-error" id="checkoutError" role="alert" hidden></div>
         </form>
@@ -516,7 +516,9 @@ if(checkoutForm) checkoutForm.addEventListener('submit',async(event)=>{
     email:document.getElementById('checkoutEmail')?.value||'',
     cpf:document.getElementById('checkoutCpf')?.value||'',
     area:selectedArea,
-    checkoutKey:jrCheckoutKey
+    checkoutKey:jrCheckoutKey,
+    termsAccepted:true,
+    termsVersion:'jr-digital-2026-10-01-v1'
   };
   checkoutSubmit.disabled=true;
   checkoutSubmit.textContent='GERANDO PIX...';
