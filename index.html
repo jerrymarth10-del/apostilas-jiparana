@@ -73,7 +73,7 @@ section{padding:78px 0}.section-title{max-width:860px;text-align:center;margin:0
 .checkout-card{width:min(100%,650px);margin:26px auto 0;text-align:left;border:1px solid rgba(255,255,255,.12);background:#0a1018;border-radius:24px;padding:20px;box-shadow:0 24px 70px rgba(0,0,0,.38)}
 .checkout-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.checkout-head strong{font-size:1.05rem}.checkout-head span{font-size:.78rem;font-weight:900;color:#8ee7bb;background:rgba(37,211,102,.10);border:1px solid rgba(37,211,102,.25);padding:7px 10px;border-radius:999px}
 .checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.checkout-grid label:first-child{grid-column:1/-1}.checkout-grid label,.pix-copy-label{display:grid;gap:7px;color:#dce5f4;font-size:.82rem;font-weight:800}.checkout-grid input,.pix-copy-label textarea{width:100%;border:1px solid rgba(255,255,255,.13);background:#070c13;color:#fff;border-radius:13px;padding:13px 14px;outline:none}.checkout-grid input:focus,.pix-copy-label textarea:focus{border-color:#7d5cff;box-shadow:0 0 0 3px rgba(125,92,255,.13)}
-.checkout-consent{display:flex;gap:9px;align-items:flex-start;margin:14px 0;color:#aab3c6;font-size:.8rem;line-height:1.5}.checkout-consent input{margin-top:3px;accent-color:#7d5cff}.checkout-submit{width:100%;border:0}.checkout-error{margin-top:12px;padding:11px 12px;border-radius:12px;background:rgba(255,42,42,.12);border:1px solid rgba(255,42,42,.25);color:#ffd8d8;font-size:.86rem;font-weight:700}
+.checkout-consent{display:flex;gap:9px;align-items:flex-start;margin:14px 0;color:#aab3c6;font-size:.8rem;line-height:1.5}.checkout-consent input{margin-top:3px;accent-color:#7d5cff}.checkout-submit{width:100%;border:0}.checkout-error{margin-top:12px;padding:11px 12px;border-radius:12px;background:rgba(255,42,42,.12);border:1px solid rgba(255,42,42,.25);color:#ffd8d8;font-size:.86rem;font-weight:700}.recover-toggle{width:100%;margin-top:11px;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:transparent;color:#dce5f4;font-weight:900;cursor:pointer}.recover-box{margin-top:12px;padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04)}.recover-box label{display:grid;gap:6px;margin-top:9px;color:#dce5f4;font-size:.8rem;font-weight:800}.recover-box input{width:100%;border:1px solid rgba(255,255,255,.13);background:#070c13;color:#fff;border-radius:12px;padding:12px 13px;outline:none}.recover-submit{width:100%;margin-top:11px;padding:13px;border:0;border-radius:12px;background:linear-gradient(180deg,#7d5cff,#593ccf);color:#fff;font-weight:900;cursor:pointer}.recover-note{margin:0;color:#aab3c6;font-size:.76rem;line-height:1.45}
 .pix-box{text-align:center}.pix-status{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;background:rgba(255,210,63,.09);border:1px solid rgba(255,210,63,.20);color:#ffe78c;font-size:.86rem;font-weight:900;margin-bottom:14px}.status-dot{width:9px;height:9px;border-radius:50%;background:#ffd23f;box-shadow:0 0 0 5px rgba(255,210,63,.10);animation:pulse 1.4s infinite}.pix-box.approved .status-dot{background:#25D366;box-shadow:0 0 0 5px rgba(37,211,102,.10)}
 #pixQr{width:230px;height:230px;object-fit:contain;background:#fff;padding:8px;border-radius:16px;margin:0 auto 14px}.pix-copy-label{text-align:left}.pix-code-wrap{position:relative}.pix-copy-label textarea{resize:none;font-size:.75rem;line-height:1.45;word-break:break-all;padding-right:58px}.pix-copy-icon{position:absolute;right:9px;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:11px;border:1px solid rgba(255,255,255,.18);background:#fff;color:#111827;display:grid;place-items:center;cursor:pointer;font-size:19px;font-weight:900;box-shadow:0 8px 18px rgba(0,0,0,.25)}.pix-copy-icon.copied{background:#25D366;color:#fff;border-color:#25D366}.copy-pix{width:100%;margin-top:12px;padding:15px 14px;border-radius:13px;border:0;background:linear-gradient(180deg,#25D366,#159447);color:#fff;font-weight:1000;box-shadow:0 14px 32px rgba(37,211,102,.22);cursor:pointer;font-size:.95rem}.pix-help{color:#aab3c6;font-size:.8rem;line-height:1.55;margin:12px 0 0}.access-platform{width:100%;margin-top:14px;background:linear-gradient(180deg,#2ed573,#159447);box-shadow:0 18px 44px rgba(37,211,102,.22);border:0}
 .whatsapp-support{position:fixed;z-index:260;left:16px;bottom:16px;display:flex;align-items:center;gap:10px;padding:11px 15px;border-radius:999px;background:#25D366;color:#fff;border:1px solid rgba(255,255,255,.35);box-shadow:0 16px 38px rgba(0,0,0,.32);font-weight:900}
@@ -328,6 +328,14 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
           <button class="btn checkout-submit" id="checkoutSubmit" type="submit">GERAR PIX E GARANTIR ACESSO</button>
           <div class="checkout-error" id="checkoutError" role="alert" hidden></div>
         </form>
+        <button class="recover-toggle" id="recoverToggle" type="button">JÁ PAGUEI / RECUPERAR ACESSO</button>
+        <div class="recover-box" id="recoverBox" hidden>
+          <p class="recover-note">Use o mesmo e-mail da compra e o identificador numérico que aparece no comprovante Pix (ex.: mpqrinter123456 → informe 123456).</p>
+          <label>E-mail da compra<input id="recoverEmail" type="email" autocomplete="email" inputmode="email" placeholder="voce@email.com"></label>
+          <label>Identificador do pagamento<input id="recoverPaymentId" inputmode="numeric" autocomplete="off" placeholder="Somente números"></label>
+          <button class="recover-submit" id="recoverSubmit" type="button">LIBERAR MEU ACESSO</button>
+          <div class="checkout-error" id="recoverError" role="alert" hidden></div>
+        </div>
 
         <div class="pix-box" id="pixBox" hidden>
           <div class="pix-status" id="pixStatus" aria-live="polite"><span class="status-dot"></span> Aguardando pagamento...</div>
@@ -383,6 +391,13 @@ const copyPix = document.getElementById('copyPix');
 const accessPlatform = document.getElementById('accessPlatform');
 const areaPicker = document.getElementById('areaPicker');
 const checkoutAreaInputs = Array.from(document.querySelectorAll('input[name="area"]'));
+const recoverToggle=document.getElementById('recoverToggle');
+const recoverBox=document.getElementById('recoverBox');
+const recoverEmail=document.getElementById('recoverEmail');
+const recoverPaymentId=document.getElementById('recoverPaymentId');
+const recoverSubmit=document.getElementById('recoverSubmit');
+const recoverError=document.getElementById('recoverError');
+const JR_PENDING_KEY='jr_sesau_pending_checkout_v1';
 function jrNewCheckoutKey(){
   if(window.crypto && typeof window.crypto.randomUUID==='function') return window.crypto.randomUUID();
   const bytes=new Uint8Array(16);
@@ -464,6 +479,7 @@ async function jrCheckPayment(){
       if(pixBox) pixBox.classList.add('approved');
       if(pixStatus) pixStatus.innerHTML='<span class="status-dot"></span> Pagamento aprovado! Abrindo sua plataforma...';
       if(accessPlatform) accessPlatform.hidden=false;
+      try{localStorage.removeItem(JR_PENDING_KEY);}catch(e){}
       setTimeout(jrOpenPlatform,1200);
     }else if(pixStatus){
       const label=String(data.status||'pending').toLowerCase()==='pending'?'Aguardando pagamento...':'Confirmando pagamento...';
@@ -513,6 +529,14 @@ if(checkoutForm) checkoutForm.addEventListener('submit',async(event)=>{
     if(!response.ok) throw new Error(data.error||'Não foi possível gerar o Pix.');
     jrCheckoutToken=data.checkoutToken||'';
     if(!jrCheckoutToken) throw new Error('Checkout não retornou a confirmação necessária.');
+    try{localStorage.setItem(JR_PENDING_KEY,JSON.stringify({
+      checkoutToken:jrCheckoutToken,
+      qrCode:data.qrCode||'',
+      qrCodeBase64:data.qrCodeBase64||'',
+      area:selectedArea,
+      areaName:data.areaName||selectedArea,
+      createdAt:Date.now()
+    }));}catch(e){}
     jrLockAreaSelection(data.areaName||selectedArea);
     if(cpfInput) cpfInput.value='';
     checkoutForm.hidden=true;
@@ -528,6 +552,55 @@ if(checkoutForm) checkoutForm.addEventListener('submit',async(event)=>{
     checkoutSubmit.textContent='GERAR PIX E GARANTIR ACESSO';
   }
 });
+
+
+if(recoverToggle) recoverToggle.addEventListener('click',()=>{
+  recoverBox.hidden=!recoverBox.hidden;
+  if(!recoverBox.hidden && recoverEmail) recoverEmail.focus();
+});
+if(recoverSubmit) recoverSubmit.addEventListener('click',async()=>{
+  if(recoverError) recoverError.hidden=true;
+  const email=String(recoverEmail?.value||'').trim();
+  const paymentId=String(recoverPaymentId?.value||'').trim();
+  if(!email || !paymentId){
+    if(recoverError){recoverError.textContent='Informe o e-mail da compra e o identificador do pagamento.';recoverError.hidden=false;}
+    return;
+  }
+  recoverSubmit.disabled=true;recoverSubmit.textContent='CONFIRMANDO PAGAMENTO...';
+  try{
+    const r=await fetch('/api/payment-status',{method:'POST',headers:{'Content-Type':'application/json'},cache:'no-store',body:JSON.stringify({recover:true,email,paymentId})});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok) throw new Error(d.error||'Não foi possível recuperar o acesso.');
+    if(!d.approved) throw new Error('O pagamento ainda não aparece como aprovado.');
+    jrAccessToken=d.accessToken||'';jrPlatformUrl=d.platformUrl||'';
+    if(!jrAccessToken||!jrPlatformUrl) throw new Error('A liberação não foi retornada.');
+    recoverSubmit.textContent='PAGAMENTO APROVADO ✓';
+    setTimeout(jrOpenPlatform,500);
+  }catch(e){
+    if(recoverError){recoverError.textContent=e?.message||'Não foi possível recuperar o acesso.';recoverError.hidden=false;}
+    recoverSubmit.disabled=false;recoverSubmit.textContent='LIBERAR MEU ACESSO';
+  }
+});
+
+function jrResumePendingCheckout(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(JR_PENDING_KEY)||'null');
+    if(!saved?.checkoutToken) return;
+    if(!saved.createdAt || Date.now()-Number(saved.createdAt)>26*60*60*1000){localStorage.removeItem(JR_PENDING_KEY);return;}
+    jrCheckoutToken=String(saved.checkoutToken);
+    if(checkoutForm) checkoutForm.hidden=true;
+    if(pixBox) pixBox.hidden=false;
+    if(pixCode) pixCode.value=String(saved.qrCode||'');
+    if(saved.qrCodeBase64 && pixQr){pixQr.src='data:image/png;base64,'+saved.qrCodeBase64;pixQr.hidden=false;}
+    jrLockAreaSelection(saved.areaName||saved.area||'selecionada');
+    if(!jrPollTimer) jrPollTimer=setInterval(jrCheckPayment,3000);
+    jrCheckPayment();
+  }catch(e){}
+}
+jrResumePendingCheckout();
+window.addEventListener('focus',jrCheckPayment);
+window.addEventListener('pageshow',jrCheckPayment);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')jrCheckPayment();});
 
 const heroSection = document.querySelector('.hero');
 const checkoutSection = document.getElementById('comprar');
