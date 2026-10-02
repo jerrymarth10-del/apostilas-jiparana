@@ -168,6 +168,19 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
 .area-option input:checked + span{border-color:#0e8a7a;background:#e9f8f4;color:#075f55;box-shadow:0 0 0 3px rgba(14,138,122,.10)}
 .area-option input:focus-visible + span{outline:3px solid rgba(47,128,237,.22);outline-offset:2px}
 @media(max-width:620px){.area-options{grid-template-columns:1fr}.area-option span{min-height:45px}}
+
+/* Conversão: demonstração principal + depoimento em vídeo */
+.hero-video-subtitle{margin:0;text-align:center;max-width:620px;line-height:1.55;font-size:.94rem;color:#cbd4e4}
+.hero-video-wrap{position:relative;display:grid;place-items:center;width:100%}
+.main-video-sound{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);z-index:5;border:1px solid rgba(255,255,255,.20);background:rgba(5,8,15,.88);color:#fff;padding:10px 14px;border-radius:999px;font-weight:900;cursor:pointer;box-shadow:0 10px 28px rgba(0,0,0,.18);backdrop-filter:blur(8px)}
+.main-video-sound:hover{transform:translateX(-50%) translateY(-1px)}
+.featured-video-proof{display:grid;grid-template-columns:minmax(0,.85fr) minmax(260px,1.15fr);gap:24px;align-items:center;margin:0 auto 26px;padding:22px;border-radius:26px;border:1px solid rgba(255,255,255,.11);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.025));box-shadow:0 22px 70px rgba(0,0,0,.38)}
+.featured-video-copy .proof-badge{display:inline-flex;padding:7px 11px;border-radius:999px;font-size:.78rem;font-weight:900;letter-spacing:.2px;background:rgba(255,210,63,.12);border:1px solid rgba(255,210,63,.30);color:#ffe47c}
+.featured-video-copy h3{margin:12px 0 9px;font-size:clamp(1.35rem,3vw,2rem);line-height:1.12}
+.featured-video-copy p{margin:0;line-height:1.65;color:#aab3c6}
+.featured-testimonial-video{display:block;width:100%;max-height:560px;aspect-ratio:9/16;object-fit:contain;background:#000;border-radius:20px;box-shadow:0 18px 48px rgba(0,0,0,.28)}
+@media(max-width:760px){.featured-video-proof{grid-template-columns:1fr}.featured-video-copy{text-align:center}.main-video-sound{bottom:10px;font-size:.82rem}}
+
 </style>
 </head>
 <body>
@@ -195,10 +208,14 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
     <div class="hero-media reveal">
       <div class="hero-video-shell">
         <div class="hero-video-label">▶ VEJA A PLATAFORMA POR DENTRO</div>
-        <video class="hero-video" controls playsinline preload="metadata" poster="assets/hero.jpg" aria-label="Vídeo de apresentação do preparatório SESAU Rondônia">
-          <source src="https://rgglopnpjfryxdbfspbt.supabase.co/storage/v1/object/public/jr-media/landing/sesau-video-conversao.mp4" type="video/mp4">
-          Seu navegador não conseguiu reproduzir o vídeo.
-        </video>
+        <p class="hero-video-subtitle">Estude pelo celular ou pelo computador. Veja a organização das videoaulas, PDFs, mapas mentais, questões e simulados antes de começar.</p>
+        <div class="hero-video-wrap">
+          <video class="hero-video" id="mainPlatformVideo" controls autoplay muted playsinline preload="metadata" poster="assets/hero.jpg" aria-label="Demonstração da plataforma JR Aprova funcionando no celular e no computador">
+            <source src="https://rgglopnpjfryxdbfspbt.supabase.co/storage/v1/object/public/jr-media/landing/plataforma-jr-aprova-2026.mp4" type="video/mp4">
+            Seu navegador não conseguiu reproduzir o vídeo.
+          </video>
+          <button class="main-video-sound" id="mainVideoSound" type="button" aria-pressed="false">🔊 Ativar som</button>
+        </div>
       </div>
     </div>
   </div>
@@ -251,6 +268,17 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
     <div class="section-title reveal">
       <h2>Experiências de quem já estudou com o material</h2>
       <p>Relatos e avaliações compartilhados por alunos e clientes sobre a experiência com os materiais e a plataforma.</p>
+    </div>
+    <div class="featured-video-proof reveal">
+      <div class="featured-video-copy">
+        <span class="proof-badge">DEPOIMENTO REAL</span>
+        <h3>Mais de 40 alunos aprovados em concurso anterior</h3>
+        <p>Veja o relato de uma das alunas que estudou com nosso material. Resultados anteriores não garantem aprovação, mas mostram como foi a experiência real com a preparação.</p>
+      </div>
+      <video class="featured-testimonial-video" controls playsinline preload="metadata" poster="assets/depoimento_aprovada_saude.jpg" aria-label="Depoimento de aluna sobre a experiência com a JR Aprova">
+        <source src="https://rgglopnpjfryxdbfspbt.supabase.co/storage/v1/object/public/jr-media/landing/sesau-video-conversao.mp4" type="video/mp4">
+        Seu navegador não conseguiu reproduzir o depoimento.
+      </video>
     </div>
     <div class="testimonials-shell reveal">
       <div class="testimonials">
@@ -691,6 +719,52 @@ startAuto();
 
 </script>
 \n<script src="/card-payment.js" defer></script>
+
+<script>
+(() => {
+  const video = document.getElementById('mainPlatformVideo');
+  const soundButton = document.getElementById('mainVideoSound');
+  if (!video) return;
+
+  video.muted = true;
+  video.setAttribute('muted', '');
+
+  const playIfPossible = () => {
+    const promise = video.play();
+    if (promise && typeof promise.catch === 'function') promise.catch(() => {});
+  };
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.45) {
+          playIfPossible();
+        } else if (!entry.isIntersecting || entry.intersectionRatio < 0.20) {
+          video.pause();
+        }
+      });
+    }, { threshold: [0, 0.20, 0.45, 0.75] });
+    observer.observe(video);
+  } else {
+    playIfPossible();
+  }
+
+  if (soundButton) {
+    const syncSoundLabel = () => {
+      soundButton.textContent = video.muted ? '🔊 Ativar som' : '🔇 Tirar som';
+      soundButton.setAttribute('aria-pressed', String(!video.muted));
+    };
+    syncSoundLabel();
+    soundButton.addEventListener('click', () => {
+      video.muted = !video.muted;
+      syncSoundLabel();
+      playIfPossible();
+    });
+    video.addEventListener('volumechange', syncSoundLabel);
+  }
+})();
+</script>
+
 </body>
 </html>
 
