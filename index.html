@@ -190,14 +190,13 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
 .hero-conversion-line{font-weight:900;color:#fff}
 @media(max-width:760px){.hero{min-height:auto;padding-top:32px}.hero h1{font-size:clamp(2.8rem,14vw,4.2rem)}.hero-proof{text-align:left}.cta-row .btn,.cta-row .btn-ghost{width:100%}}
 
-</style>
+\n/* JR: seletor de concurso para navegação entre SEMUSA e SESAU */\n.jr-exam-switch{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 26px;padding:14px 16px;border:1px solid rgba(17,107,143,.18);border-radius:18px;background:rgba(255,255,255,.92);box-shadow:0 12px 32px rgba(16,42,67,.08);backdrop-filter:blur(8px)}\n.jr-exam-switch-copy{display:grid;gap:3px;min-width:0}.jr-exam-switch-copy strong{font-size:.94rem;color:#173f59}.jr-exam-switch-copy span{font-size:.76rem;line-height:1.35;color:#667f91}\n.jr-exam-switch-actions{display:flex;gap:8px;flex:0 0 auto}.jr-exam-choice{display:grid;gap:2px;min-width:128px;padding:10px 13px;border-radius:13px;border:1px solid #d5e3eb;background:#fff;text-align:center;text-decoration:none;color:#173f59;transition:.18s ease}.jr-exam-choice b{font-size:.82rem}.jr-exam-choice small{font-size:.66rem;color:#718493}.jr-exam-choice:hover{transform:translateY(-1px);border-color:#90c9d7}.jr-exam-choice.is-current{background:linear-gradient(135deg,#0e8a7a,#116b8f);border-color:transparent;color:#fff;box-shadow:0 8px 20px rgba(17,107,143,.18)}.jr-exam-choice.is-current small{color:rgba(255,255,255,.82)}\n@media(max-width:700px){.jr-exam-switch{align-items:stretch;flex-direction:column;margin-bottom:20px;padding:13px}.jr-exam-switch-actions{display:grid;grid-template-columns:1fr 1fr}.jr-exam-choice{min-width:0;padding:10px 8px}}\n</style>
 </head>
 <body>
 <div class="top-bar" id="locationBar">Preparatório digital SESAU Rondônia • Estude no celular ou computador</div>
 <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>Videoaulas</span><span>PDFs organizados</span><span>Leis do SUS</span><span>Mapas mentais</span><span>Questões comentadas</span><span>Simulados</span><span>Videoaulas</span><span>PDFs organizados</span><span>Leis do SUS</span><span>Mapas mentais</span><span>Questões comentadas</span><span>Simulados</span></div></div>
 
-<header class="hero">
-  <div class="container hero-grid">
+<header class="hero">\n<div class="container" id="jr-exam-switch-v1">\n  <div class="jr-exam-switch">\n    <div class="jr-exam-switch-copy"><strong>Qual concurso você vai fazer?</strong><span>Escolha seu preparatório e estude na trilha certa para a sua prova.</span></div>\n    <div class="jr-exam-switch-actions">\n      <a class="jr-exam-choice is-current" href="#comprar" aria-current="page"><b>SESAU/RO</b><small>Você está aqui</small></a>\n      <a class="jr-exam-choice" href="https://semusa-sesau-app.vercel.app/"><b>SEMUSA</b><small>Ver preparatório</small></a>\n    </div>\n  </div>\n</div>\n  <div class="container hero-grid">
     <div class="reveal">
       <div class="eyebrow">🎯 Preparatório SESAU Rondônia</div>
       <h1>ESTUDE O QUE REALMENTE CAI<br><span class="yellow">PARA A SUA ÁREA</span></h1>
@@ -357,6 +356,7 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
               <label class="area-option"><input type="radio" name="area" value="acsfiscal"><span>Agente de Saúde e Fiscal Sanitário</span></label>
               <label class="area-option"><input type="radio" name="area" value="clinico"><span>Clínico Geral Medicina</span></label>
               <label class="area-option"><input type="radio" name="area" value="endemias"><span>Agente de Combate às Endemias</span></label>
+              <label class="area-option"><input type="radio" name="area" value="administrativo"><span>Área Administrativa</span></label>
             </div>
           </fieldset>
 
