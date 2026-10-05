@@ -65,6 +65,7 @@ module.exports=async function handler(req,res){
       email:body.email,
       cpf:body.cpf,
       area:body.area,
+      variant:body.variant,
       paymentMethod:body.paymentMethod,
       checkoutKey,
       termsAccepted:body.termsAccepted===true,
