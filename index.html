@@ -474,6 +474,7 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
             </div>
           </label>
           <button class="copy-pix" id="copyPix" type="button">📋 COPIAR CÓDIGO PIX</button>
+          <button class="recover-toggle" id="newCheckoutButton" type="button" style="margin-top:10px;border-color:#b8d9cf;color:#0b6f61;background:#f4fbf8">↻ ESCOLHER OUTRA ÁREA / GERAR NOVO PIX</button>
           <p class="pix-help">Depois de pagar, esta página confirma o pagamento automaticamente e abre sua plataforma SESAU.</p>
           <button class="btn access-platform" id="accessPlatform" type="button" hidden>ENTRAR NA PLATAFORMA SESAU</button>
         </div>
@@ -522,7 +523,9 @@ const recoverPaymentId=document.getElementById('recoverPaymentId');
 const recoverCpf=document.getElementById('recoverCpf');
 const recoverSubmit=document.getElementById('recoverSubmit');
 const recoverError=document.getElementById('recoverError');
+const newCheckoutButton=document.getElementById('newCheckoutButton');
 const JR_PENDING_KEY='jr_sesau_pending_checkout_v1';
+const JR_PENDING_MAX_AGE=30*60*1000;
 function jrNewCheckoutKey(){
   if(window.crypto && typeof window.crypto.randomUUID==='function') return window.crypto.randomUUID();
   const bytes=new Uint8Array(16);
@@ -587,6 +590,30 @@ function jrLockAreaSelection(areaName){
   areaPicker.setAttribute('aria-disabled','true');
   const legend=areaPicker.querySelector('legend');
   if(legend) legend.textContent='Área vinculada ao Pix: '+String(areaName||'selecionada');
+}
+function jrUnlockAreaSelection(){
+  checkoutAreaInputs.forEach(function(input){input.disabled=false;});
+  if(areaPicker){
+    areaPicker.removeAttribute('aria-disabled');
+    const legend=areaPicker.querySelector('legend');
+    if(legend) legend.textContent='1. Escolha a sua área de preparação';
+  }
+  jrRenderAreaSelection();
+}
+function jrResetPendingCheckout(){
+  if(jrPollTimer){clearInterval(jrPollTimer);jrPollTimer=null;}
+  jrCheckoutToken='';jrAccessToken='';jrPlatformUrl='';jrRedirecting=false;
+  try{localStorage.removeItem(JR_PENDING_KEY);}catch(e){}
+  if(pixBox){pixBox.classList.remove('approved');pixBox.hidden=true;}
+  if(pixStatus) pixStatus.innerHTML='<span class="status-dot"></span> Aguardando pagamento...';
+  if(pixCode) pixCode.value='';
+  if(pixQr){pixQr.removeAttribute('src');pixQr.hidden=true;}
+  if(accessPlatform) accessPlatform.hidden=true;
+  if(checkoutForm) checkoutForm.hidden=false;
+  if(checkoutSubmit){checkoutSubmit.disabled=false;checkoutSubmit.textContent='GERAR PIX E GARANTIR ACESSO';}
+  jrCheckoutKey=jrNewCheckoutKey();
+  jrUnlockAreaSelection();
+  areaPicker?.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function jrShowCheckoutError(message){
@@ -745,7 +772,7 @@ function jrResumePendingCheckout(){
   try{
     const saved=JSON.parse(localStorage.getItem(JR_PENDING_KEY)||'null');
     if(!saved?.checkoutToken) return;
-    if(!saved.createdAt || Date.now()-Number(saved.createdAt)>26*60*60*1000){localStorage.removeItem(JR_PENDING_KEY);return;}
+    if(!saved.createdAt || Date.now()-Number(saved.createdAt)>JR_PENDING_MAX_AGE){localStorage.removeItem(JR_PENDING_KEY);return;}
     jrCheckoutToken=String(saved.checkoutToken);
     if(checkoutForm) checkoutForm.hidden=true;
     if(pixBox) pixBox.hidden=false;
@@ -756,6 +783,7 @@ function jrResumePendingCheckout(){
     jrCheckPayment();
   }catch(e){}
 }
+if(newCheckoutButton)newCheckoutButton.addEventListener('click',jrResetPendingCheckout);
 jrResumePendingCheckout();
 window.addEventListener('focus',jrCheckPayment);
 window.addEventListener('pageshow',jrCheckPayment);
