@@ -171,7 +171,8 @@ footer{text-align:center;padding:40px 0 90px;color:#6b7f90;border-top:1px solid 
           <label class="area"><input type="radio" name="area" value="laboratorio"><span>Técnico de Laboratório</span></label>
           <label class="area"><input type="radio" name="area" value="biomedicina"><span>Biomedicina</span></label>
           <label class="area"><input type="radio" name="area" value="psicologia"><span>Psicologia</span></label>
-          <label class="area"><input type="radio" name="area" value="acsfiscal"><span>Agente de Saúde / Fiscal Sanitário</span></label>
+          <label class="area"><input type="radio" name="area" value="acsfiscal" data-variant="agentesaude"><span>Agente de Saúde / Agente Comunitário</span></label>
+          <label class="area"><input type="radio" name="area" value="acsfiscal" data-variant="fiscalsanitario"><span>Fiscal Sanitário</span></label>
           <label class="area"><input type="radio" name="area" value="endemias"><span>Agente de Combate às Endemias</span></label>
           <label class="area"><input type="radio" name="area" value="clinico"><span>Clínico Geral / Medicina</span></label>
         </div>
@@ -183,7 +184,7 @@ footer{text-align:center;padding:40px 0 90px;color:#6b7f90;border-top:1px solid 
           <label>E-mail<input id="checkoutEmail" type="email" autocomplete="email" inputmode="email" placeholder="voce@email.com" required></label>
           <label>CPF<input id="checkoutCpf" inputmode="numeric" maxlength="14" autocomplete="off" placeholder="000.000.000-00" required></label>
         </div>
-        <label class="consent"><input id="checkoutConsent" type="checkbox" required><span>Confirmo meus dados, a área escolhida e quero gerar o Pix de R$ 129,90.</span></label>
+        <label class="consent"><input id="checkoutConsent" type="checkbox" required><span>Li e aceito os <a href="/termos-aquisicao-digital.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;font-weight:800">termos de privacidade</a>.</span></label>
         <button class="btn btn-primary submit" id="checkoutSubmit" type="submit">GERAR PIX E GARANTIR ACESSO</button>
         <div class="error" id="checkoutError" role="alert" hidden></div>
       </form>
@@ -240,11 +241,12 @@ let checkoutKey=uuid(),checkoutToken='',accessToken='',platformUrl='',timer=null
 
 areaInputs.forEach(input=>input.addEventListener('change',()=>{
   checkoutKey=uuid();
-  try{sessionStorage.setItem('jr_semusa_area',input.value)}catch{}
+  try{sessionStorage.setItem('jr_semusa_area',input.value);sessionStorage.setItem('jr_semusa_variant',input.dataset.variant||'')}catch{}
 }));
 try{
   const saved=sessionStorage.getItem('jr_semusa_area')||'';
-  const input=areaInputs.find(x=>x.value===saved);
+  const savedVariant=sessionStorage.getItem('jr_semusa_variant')||'';
+  const input=areaInputs.find(x=>x.value===saved&&(x.dataset.variant||'')===savedVariant);
   if(input)input.checked=true;
 }catch{}
 
@@ -302,7 +304,10 @@ form.addEventListener('submit',async e=>{
     email:document.getElementById('checkoutEmail').value,
     cpf:cpf.value,
     area,
-    checkoutKey
+    variant:document.querySelector('input[name="area"]:checked')?.dataset.variant||'',
+    checkoutKey,
+    termsAccepted:true,
+    termsVersion:'jr-digital-2026-10-01-v1'
   };
 
   submit.disabled=true;submit.textContent='GERANDO PIX...';
