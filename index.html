@@ -172,10 +172,11 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
 .area-picker-note{margin:0 0 12px;color:#607286;font-size:.78rem;line-height:1.45}
 .area-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
 .area-option{position:relative;display:block;cursor:pointer}
-.area-option input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer;z-index:2}
+.area-option input{position:absolute;opacity:0;pointer-events:none}
 .area-option span{position:relative;display:flex;align-items:center;min-height:48px;padding:11px 52px 11px 12px;border:1px solid #d6e3eb;border-radius:13px;background:#fff;color:#21435b;font-size:.78rem;font-weight:800;line-height:1.25;transition:background-color .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease,transform .18s ease}
-.area-option input:checked + span{border-color:#0e8a7a;background:#0e8a7a;color:#fff;box-shadow:0 0 0 4px rgba(14,138,122,.18),0 10px 24px rgba(14,138,122,.18);transform:translateY(-1px);animation:jrAreaSelected .28s ease-out}
-.area-option input:checked + span::after{content:"✓";position:absolute;right:14px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#0e8a7a;font-size:16px;font-weight:1000;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.area-option input:checked + span,.area-option.is-selected span{border-color:#0e8a7a;background:#0e8a7a;color:#fff;box-shadow:0 0 0 4px rgba(14,138,122,.18),0 10px 24px rgba(14,138,122,.18);transform:translateY(-1px);animation:jrAreaSelected .28s ease-out}
+.area-option input:checked + span::after,.area-option.is-selected span::after{content:"✓";position:absolute;right:14px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#0e8a7a;font-size:16px;font-weight:1000;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.area-option:active span{transform:scale(.985)}
 .area-option input:focus-visible + span{outline:3px solid rgba(14,138,122,.28);outline-offset:3px}
 @keyframes jrAreaSelected{0%{transform:scale(.985)}70%{transform:scale(1.01)}100%{transform:translateY(-1px) scale(1)}}
 @media(max-width:620px){.area-options{grid-template-columns:1fr}.area-option span{min-height:45px}}
@@ -537,8 +538,31 @@ let jrAccessToken = '';
 let jrPlatformUrl = '';
 let jrPollTimer = null;
 let jrRedirecting = false;
+function jrRenderAreaSelection(){
+  checkoutAreaInputs.forEach(function(item){
+    const label=item.closest('.area-option');
+    const selected=item.checked===true;
+    if(label){
+      label.classList.toggle('is-selected',selected);
+      label.setAttribute('aria-selected',selected?'true':'false');
+    }
+  });
+}
 checkoutAreaInputs.forEach(function(input){
+  const label=input.closest('.area-option');
+  if(label){
+    label.addEventListener('click',function(event){
+      if(input.disabled)return;
+      event.preventDefault();
+      const wasChecked=input.checked;
+      checkoutAreaInputs.forEach(function(item){item.checked=false;});
+      input.checked=true;
+      jrRenderAreaSelection();
+      if(!wasChecked)input.dispatchEvent(new Event('change',{bubbles:true}));
+    });
+  }
   input.addEventListener('change',function(){
+    jrRenderAreaSelection();
     jrCheckoutKey=jrNewCheckoutKey();
     try{
       sessionStorage.setItem('jr_selected_sesau_area',input.value);
@@ -554,6 +578,7 @@ try{
   });
   if(remembered) remembered.checked=true;
 }catch(e){}
+jrRenderAreaSelection();
 const jrAreaKeyBound = true;
 
 function jrLockAreaSelection(areaName){
