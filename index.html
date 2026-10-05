@@ -198,7 +198,18 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
 .jr-exam-switch-actions{display:flex;gap:8px;flex:0 0 auto}.jr-exam-choice{display:grid;gap:2px;min-width:128px;padding:10px 13px;border-radius:13px;border:1px solid #d5e3eb;background:#fff;text-align:center;text-decoration:none;color:#173f59;transition:.18s ease}.jr-exam-choice b{font-size:.82rem}.jr-exam-choice small{font-size:.66rem;color:#718493}.jr-exam-choice:hover{transform:translateY(-1px);border-color:#90c9d7}.jr-exam-choice.is-current{background:linear-gradient(135deg,#0e8a7a,#116b8f);border-color:transparent;color:#fff;box-shadow:0 8px 20px rgba(17,107,143,.18)}.jr-exam-choice.is-current small{color:rgba(255,255,255,.82)}
 @media(max-width:700px){.jr-exam-switch{align-items:stretch;flex-direction:column;margin-bottom:20px;padding:13px}.jr-exam-switch-actions{display:grid;grid-template-columns:1fr 1fr}.jr-exam-choice{min-width:0;padding:10px 8px}}
 </style>
-</head>
+<style id="jr-study-highlights-style">
+.jr-study-highlights{padding:54px 0 24px}
+.jr-study-highlights .jr-highlights-head{text-align:center;max-width:760px;margin:0 auto 24px}
+.jr-study-highlights .jr-highlights-head h2{margin:0 0 10px;font-size:clamp(1.8rem,4vw,2.8rem);color:#102a43}
+.jr-study-highlights .jr-highlights-head p{margin:0;color:#607286;line-height:1.65}
+.jr-highlights-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.jr-highlight-card{padding:20px;border:1px solid #dbe7ee;border-radius:20px;background:#fff;box-shadow:0 12px 32px rgba(16,42,67,.07)}
+.jr-highlight-card .jr-highlight-label{display:inline-flex;align-items:center;gap:6px;margin-bottom:12px;color:#116b8f;font-size:.72rem;font-weight:900;letter-spacing:.4px;text-transform:uppercase}
+.jr-highlight-card h3{margin:0 0 8px;color:#173f59;font-size:1.05rem}
+.jr-highlight-card p{margin:0;color:#607286;line-height:1.6;font-size:.92rem}
+@media(max-width:760px){.jr-study-highlights{padding:38px 0 16px}.jr-highlights-grid{grid-template-columns:1fr}}
+</style></head>
 <body>
 <div class="top-bar" id="locationBar">Preparatório digital SESAU Rondônia • Estude no celular ou computador</div>
 <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>Videoaulas</span><span>PDFs organizados</span><span>Leis do SUS</span><span>Mapas mentais</span><span>Questões comentadas</span><span>Simulados</span><span>Videoaulas</span><span>PDFs organizados</span><span>Leis do SUS</span><span>Mapas mentais</span><span>Questões comentadas</span><span>Simulados</span></div></div>
@@ -331,6 +342,23 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
   </div>
 </section>
 
+
+<section class="jr-study-highlights" aria-labelledby="jr-highlights-title">
+  <div class="container">
+    <div class="jr-highlights-head">
+      <h2 id="jr-highlights-title">Uma preparação mais organizada para sua área</h2>
+      <p>Veja como o preparatório facilita o início dos estudos e ajuda você a encontrar o conteúdo certo.</p>
+    </div>
+    <div class="jr-highlights-grid">
+      <article class="jr-highlight-card"><div class="jr-highlight-label">✓ Organização</div><h3>Material separado por área</h3><p>O material já vem separado para a sua área, sem precisar ficar procurando conteúdo aleatório.</p></article>
+      <article class="jr-highlight-card"><div class="jr-highlight-label">✓ Acesso fácil</div><h3>Estude pelo celular</h3><p>Acesse a plataforma pelo celular e comece a estudar assim que o acesso for liberado.</p></article>
+      <article class="jr-highlight-card"><div class="jr-highlight-label">✓ Conteúdo completo</div><h3>Tudo em um só lugar</h3><p>Encontre PDFs, videoaulas, questões comentadas e simulados em uma plataforma organizada.</p></article>
+      <article class="jr-highlight-card"><div class="jr-highlight-label">✓ Foco na prova</div><h3>Conteúdo direto ao ponto</h3><p>Estude com materiais selecionados para a sua área e mantenha o foco no que precisa revisar.</p></article>
+      <article class="jr-highlight-card"><div class="jr-highlight-label">✓ Flexibilidade</div><h3>Comece no seu ritmo</h3><p>Organize seus horários e estude pelo celular ou computador, de onde estiver.</p></article>
+      <article class="jr-highlight-card"><div class="jr-highlight-label">✓ Preparação prática</div><h3>Escolha sua área e avance</h3><p>Selecione seu cargo no checkout e receba o acesso direcionado ao conteúdo correspondente.</p></article>
+    </div>
+  </div>
+</section>
 
 <section id="comprar">
   <div class="container">
