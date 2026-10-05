@@ -524,7 +524,7 @@ const recoverCpf=document.getElementById('recoverCpf');
 const recoverSubmit=document.getElementById('recoverSubmit');
 const recoverError=document.getElementById('recoverError');
 const newCheckoutButton=document.getElementById('newCheckoutButton');
-const JR_PENDING_KEY='jr_sesau_pending_checkout_v1';
+const JR_PENDING_KEY='jr_sesau_pending_checkout_v2';
 const JR_PENDING_MAX_AGE=30*60*1000;
 function jrNewCheckoutKey(){
   if(window.crypto && typeof window.crypto.randomUUID==='function') return window.crypto.randomUUID();
