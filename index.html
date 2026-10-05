@@ -537,12 +537,18 @@ let jrRedirecting = false;
 checkoutAreaInputs.forEach(function(input){
   input.addEventListener('change',function(){
     jrCheckoutKey=jrNewCheckoutKey();
-    try{sessionStorage.setItem('jr_selected_sesau_area',input.value);}catch(e){}
+    try{
+      sessionStorage.setItem('jr_selected_sesau_area',input.value);
+      sessionStorage.setItem('jr_selected_sesau_variant',input.dataset.variant||'');
+    }catch(e){}
   });
 });
 try{
   const rememberedArea=sessionStorage.getItem('jr_selected_sesau_area')||'';
-  const remembered=checkoutAreaInputs.find(function(input){return input.value===rememberedArea;});
+  const rememberedVariant=sessionStorage.getItem('jr_selected_sesau_variant')||'';
+  const remembered=checkoutAreaInputs.find(function(input){
+    return input.value===rememberedArea && (input.dataset.variant||'')===rememberedVariant;
+  });
   if(remembered) remembered.checked=true;
 }catch(e){}
 const jrAreaKeyBound = true;
@@ -810,7 +816,7 @@ track.addEventListener('scroll', ()=>{
 startAuto();
 
 </script>
-\n<script src="/card-payment.js" defer></script>
+\n<script src="/card-payment.js?v=20261005-assistente-social" defer></script>
 
 <script>
 (() => {
