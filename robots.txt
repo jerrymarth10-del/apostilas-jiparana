@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://apostilas-sesau.vercel.app/sitemap.xml
