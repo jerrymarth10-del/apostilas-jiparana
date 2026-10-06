@@ -954,6 +954,27 @@ startAuto();
 
 <!-- deploy-retry-20261005-1222 -->
 <!-- jr-deploy-pediatria-20261005 -->
+
+<script id="jr-recovery-prefill-v1">
+(function(){
+  try{
+    var params=new URLSearchParams(location.search);
+    var area=(params.get('area')||'').trim().toLowerCase();
+    var variant=(params.get('variant')||'').trim().toLowerCase();
+    if(!area)return;
+    var radios=Array.prototype.slice.call(document.querySelectorAll('input[name="area"]'));
+    var target=radios.find(function(input){
+      if(String(input.value||'').trim().toLowerCase()!==area)return false;
+      var v=String(input.getAttribute('data-variant')||'').trim().toLowerCase();
+      return variant ? v===variant : true;
+    });
+    if(target){
+      target.checked=true;
+      target.dispatchEvent(new Event('change',{bubbles:true}));
+    }
+  }catch(e){}
+})();
+</script>
 </body>
 </html>
 
