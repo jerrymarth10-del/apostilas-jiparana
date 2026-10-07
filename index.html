@@ -209,6 +209,22 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
 .jr-exam-switch-copy{display:grid;gap:3px;min-width:0}.jr-exam-switch-copy strong{font-size:.94rem;color:#173f59}.jr-exam-switch-copy span{font-size:.76rem;line-height:1.35;color:#667f91}
 .jr-exam-switch-actions{display:flex;gap:8px;flex:0 0 auto}.jr-exam-choice{display:grid;gap:2px;min-width:128px;padding:10px 13px;border-radius:13px;border:1px solid #d5e3eb;background:#fff;text-align:center;text-decoration:none;color:#173f59;transition:.18s ease}.jr-exam-choice b{font-size:.82rem}.jr-exam-choice small{font-size:.66rem;color:#718493}.jr-exam-choice:hover{transform:translateY(-1px);border-color:#90c9d7}.jr-exam-choice.is-current{background:linear-gradient(135deg,#0e8a7a,#116b8f);border-color:transparent;color:#fff;box-shadow:0 8px 20px rgba(17,107,143,.18)}.jr-exam-choice.is-current small{color:rgba(255,255,255,.82)}
 @media(max-width:700px){.jr-exam-switch{align-items:stretch;flex-direction:column;margin-bottom:20px;padding:13px}.jr-exam-switch-actions{display:grid;grid-template-columns:1fr 1fr}.jr-exam-choice{min-width:0;padding:10px 8px}}
+
+/* Oferta promocional SESAU / SEMUSA */
+.jr-promo{margin:22px 0 6px;padding:20px 22px;border:1px solid #b8ded3;border-radius:20px;background:linear-gradient(125deg,#effaf5,#fff);max-width:560px;box-shadow:0 12px 30px rgba(14,138,122,.08)}
+.jr-promo-tag{display:inline-block;padding:6px 10px;border-radius:7px;background:#0b3154;color:#fff;font:800 .72rem Inter,Arial,sans-serif;letter-spacing:.09em;text-transform:uppercase}
+.jr-old-price{display:block;margin-top:14px;color:#607286;font:600 1rem Inter,Arial,sans-serif}
+.jr-old-price s{text-decoration-thickness:2px;text-decoration-color:#a43b45}
+.jr-promo-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;margin:5px 0;color:#0e8a7a}
+.jr-promo-price span{font:700 .94rem Inter,Arial,sans-serif;color:#34566d}
+.jr-promo-price strong{font:900 clamp(2.5rem,8vw,3.5rem)/1.1 Inter,Arial,sans-serif;letter-spacing:-1.8px;white-space:nowrap}
+.jr-savings{display:inline-block;margin:9px 0 5px;padding:7px 11px;border-radius:8px;background:#dbf3e6;color:#125e43;font:800 .85rem Inter,Arial,sans-serif}
+.jr-promo small{display:block;margin-top:7px;color:#486477;font:500 .8rem/1.5 Inter,Arial,sans-serif}
+.jr-offer-before{margin:16px 0 0;color:#607286;font:600 1.1rem Inter,Arial,sans-serif}
+.jr-offer-before s{text-decoration-thickness:2px;text-decoration-color:#a43b45}
+.jr-offer-before span{display:block;margin-top:10px;color:#34566d;font-size:.95rem}
+@media(max-width:480px){.jr-promo{padding:17px}.jr-promo-price strong{font-size:2.7rem}}
+
 </style>
 <style id="jr-study-highlights-style">
 .jr-study-highlights{padding:54px 0 24px}
@@ -255,7 +271,14 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
         <div class="point">✅ Celular e computador</div>
       </div>
       <div class="cta-row">
-        <a class="btn" href="#comprar">ESCOLHER MINHA ÁREA E COMEÇAR</a>
+        <div class="jr-promo" aria-label="Oferta do preparatório">
+      <span class="jr-promo-tag">Oferta especial</span>
+      <span class="jr-old-price">De <s>R$ 600,00</s></span>
+      <div class="jr-promo-price"><span>por apenas</span> <strong>R$ 129,90</strong></div>
+      <span class="jr-savings">Você economiza R$ 470,10</span>
+      <small>Pagamento único • Escolha seu cargo e comece a estudar.<br>Pix ou cartão pelo Mercado Pago.</small>
+    </div>
+    <a class="btn" href="#comprar">QUERO APROVEITAR A OFERTA</a>
         <a class="btn-ghost" href="#material">VER O QUE VOU RECEBER</a>
       </div>
       <div class="micro-proof">Pix ou cartão pelo Mercado Pago • Acesso digital após a confirmação • Liberação automática</div>
@@ -405,7 +428,9 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
       <h2 style="margin:0 0 10px; font-size:clamp(2rem,4vw,3.3rem)">Comece sua preparação agora</h2>
       <p style="color:var(--muted); max-width:700px; margin:0 auto 14px; line-height:1.75">Tenha acesso ao preparatório SESAU Rondônia com legislação do SUS, mapas mentais, simulados, questões comentadas, PDFs e videoaulas em uma plataforma organizada.</p>
       <div class="payment-badge">Pagamento único</div>
+      <div class="jr-offer-before">De <s>R$ 600,00</s><span>por apenas</span></div>
       <div class="price">R$ 129,90</div>
+      <div class="jr-savings">Economize R$ 470,10 nesta oferta</div>
       <div class="subprice">acesso digital após a confirmação do pagamento</div>
       <div class="included">
         <div class="item">✅ Material SESAU Rondônia</div>
@@ -503,7 +528,7 @@ footer{color:#6a7d8e;border-color:#dfe9ef}
 </section>
 
 <footer>JR Apostilas • SESAU Rondônia • Saúde</footer>
-<a class="floating-cta" href="#comprar">QUERO ACESSAR O PREPARATÓRIO</a>
+<a class="floating-cta" href="#comprar">APROVEITAR OFERTA • R$ 129,90</a>
 
 
 <script>
