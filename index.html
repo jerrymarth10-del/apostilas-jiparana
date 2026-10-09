@@ -1038,6 +1038,8 @@ function install(){
  pay.append(choices,el('p','jr-flow-help','Pagamento seguro processado pelo Mercado Pago. Se o cartão for recusado e houver alternativa disponível, você poderá tentar pela InfinitePay.'));form.append(pay);pay.append(pixButton,cardButton);if(note)pay.append(note);panels.push(pay);
  pixButton.textContent='Gerar Pix';cardButton.textContent='Continuar com cartão';
  const navigation=el('div','jr-flow-nav'),back=el('button','jr-flow-back','Voltar'),next=el('button','jr-flow-next','Continuar');back.type=next.type='button';navigation.append(back,next);card.append(navigation);
+ const recoveryToggle=document.getElementById('recoverToggle'),recoveryPanel=document.getElementById('recoverBox');
+ if(recoveryToggle){recoveryToggle.textContent='Já paguei / recuperar acesso';recoveryToggle.style.cssText='display:block;width:auto;max-width:100%;margin:24px auto 0;padding:8px 12px;border:0;border-radius:6px;background:transparent;color:var(--muted);font-size:.78rem;font-weight:600;text-decoration:underline;text-underline-offset:3px;box-shadow:none;cursor:pointer';card.append(recoveryToggle);if(recoveryPanel)card.append(recoveryPanel);}
  const status=el('p','jr-flow-status');status.setAttribute('role','status');status.setAttribute('aria-live','polite');picker.append(status);
  const searchLabel=el('label','jr-search-label','Encontre seu cargo');const search=el('input','jr-cargo-search');search.type='search';search.placeholder='Buscar cargo, ex.: Enfermagem';searchLabel.append(search);picker.querySelector('.areas,.area-options').before(searchLabel);
  const normalize=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
