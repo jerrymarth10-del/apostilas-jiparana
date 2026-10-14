@@ -252,6 +252,18 @@ body.jr-guided-checkout{padding-bottom:112px}.jr-guided-checkout .float,.jr-guid
 /* Readable trust messages on the light background. */
 .jr-guided-checkout .hero-proof{background:#fff9e9;border-color:#ead6a0;box-shadow:none}.jr-guided-checkout .hero-proof strong{color:#74531a}.jr-guided-checkout .hero-proof span{color:#526777}.jr-guided-checkout .micro-proof,.jr-guided-checkout .hero .micro{color:#426376}.jr-checkout-trust{background:#eff8f6;border:1px solid #cee5df;border-radius:12px;padding:12px 14px;margin:0 0 20px;color:#0b665b;font-size:.9rem;line-height:1.5;font-weight:700}
 </style>
+
+<style id="jr-offer-benefits-compact-v1">
+/* Somente apresentação dos benefícios; checkout e componentes de pagamento intactos. */
+.offer .jr-offer-inclusions-title,.offer-box .jr-offer-inclusions-title{color:#173f59;font-size:clamp(1.16rem,3.2vw,1.5rem);line-height:1.28;margin:18px 0 6px;font-weight:900;letter-spacing:-.3px}
+.offer .jr-offer-inclusions-subtitle,.offer-box .jr-offer-inclusions-subtitle{color:#526b7d;font-size:.9rem;line-height:1.5;margin:0 auto 14px;max-width:600px}
+.offer .included,.offer-box .included{width:100%;max-width:700px;margin:15px auto 20px;gap:10px;text-align:left}
+.offer .included>div,.offer-box .included>.item{display:flex;align-items:center;gap:11px;min-width:0;min-height:62px;padding:12px 14px;border-radius:13px;background:#f7fafc;border:1px solid #dce8ef;color:#23445d;font-size:.94rem;font-weight:750;line-height:1.42}
+.jr-offer-check{display:inline-grid;flex:0 0 27px;width:27px;height:27px;place-items:center;border-radius:50%;background:#e1f5eb;border:1px solid #bfe2d1;color:#13784f;font-size:16px;font-weight:900}
+.offer .included>div span:last-child,.offer-box .included>.item span:last-child{min-width:0}
+.offer-box .subprice{color:#34566d}
+@media(max-width:680px){.offer .included,.offer-box .included{grid-template-columns:1fr;gap:8px}.offer .included>div,.offer-box .included>.item{min-height:0;padding:11px 12px;font-size:.9rem}.offer .jr-offer-inclusions-title,.offer-box .jr-offer-inclusions-title{font-size:1.2rem}}
+</style>
 </head>
 <body>
 <div class="top-bar" id="locationBar">Preparatório digital SESAU Rondônia • Estude no celular ou computador</div>
@@ -439,14 +451,16 @@ body.jr-guided-checkout{padding-bottom:112px}.jr-guided-checkout .float,.jr-guid
       <div class="price">R$ 129,90</div>
       <div class="jr-savings">Economize R$ 470,10 nesta oferta</div>
       <div class="subprice">acesso digital após a confirmação do pagamento</div>
-      <div class="included">
-        <div class="item">✅ Material SESAU Rondônia</div>
-        <div class="item">✅ Legislação do SUS</div>
-        <div class="item">✅ Mapas Mentais</div>
-        <div class="item">✅ Questões comentadas</div>
-        <div class="item">✅ Videoaulas</div>
-        <div class="item">✅ Material digital e muito mais</div>
-      </div>
+
+    <h3 class="jr-offer-inclusions-title">Tudo o que você precisa para estudar em um só lugar</h3>
+    <p class="jr-offer-inclusions-subtitle">Preparação organizada para você estudar pelo celular ou computador.</p>
+    <div class="included" aria-label="Materiais incluídos conforme o preparatório escolhido">
+      <div class="item"><span class="jr-offer-check" aria-hidden="true">✓</span><span>Videoaulas organizadas por disciplina</span></div>
+      <div class="item"><span class="jr-offer-check" aria-hidden="true">✓</span><span>Apostilas e PDFs específicos para seu cargo</span></div>
+      <div class="item"><span class="jr-offer-check" aria-hidden="true">✓</span><span>Questões comentadas para praticar</span></div>
+      <div class="item"><span class="jr-offer-check" aria-hidden="true">✓</span><span>Simulados e provas anteriores</span></div>
+      <div class="item"><span class="jr-offer-check" aria-hidden="true">✓</span><span>Mapas mentais e materiais de revisão</span></div>
+    </div>
       <div class="checkout-card" id="checkoutCard">
         <div class="checkout-head">
           <strong>Pagamento seguro via Pix ou Cartão</strong>
