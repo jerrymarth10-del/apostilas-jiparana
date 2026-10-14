@@ -357,7 +357,7 @@ body.jr-guided-checkout{padding-bottom:112px}.jr-guided-checkout .float,.jr-guid
         <div class="hero-video-label">▶ VEJA A PLATAFORMA POR DENTRO</div>
         <p class="hero-video-subtitle">Estude pelo celular ou pelo computador. Veja a organização das videoaulas, PDFs, mapas mentais, questões e simulados antes de começar.</p>
         <div class="hero-video-wrap">
-          <video class="hero-video" id="mainPlatformVideo" controls autoplay muted playsinline preload="metadata" poster="assets/hero.jpg" aria-label="Demonstração da plataforma JR Aprova funcionando no celular e no computador">
+          <video class="hero-video" id="mainPlatformVideo" muted playsinline preload="metadata" poster="assets/hero.jpg" aria-label="Demonstração da plataforma JR Aprova funcionando no celular e no computador">
             <source src="https://rgglopnpjfryxdbfspbt.supabase.co/storage/v1/object/public/jr-media/landing/plataforma-jr-aprova-2026.mp4" type="video/mp4">
             Seu navegador não conseguiu reproduzir o vídeo.
           </video>
@@ -974,35 +974,122 @@ startAuto();
 <script src="/infinitepay-payment.js?v=20261008-fallback" defer></script>
 <script src="/card-payment.js?v=20261013-return-fallback" defer></script>
 
-<script>
+<script id="jr-main-video-one-view-v1">
 (() => {
+  // Apenas o vídeo principal de demonstração. Os depoimentos ficam inalterados.
   const video = document.getElementById('mainPlatformVideo');
   const soundButton = document.getElementById('mainVideoSound');
   if (!video) return;
+  const shell = video.closest('.hero-video-shell');
+  const key = 'jr_aprova_demo_plataforma_assistido_v1';
+  const alreadyStarted = () => {
+    try { return localStorage.getItem(key) === '1'; } catch (_) { return false; }
+  };
+  const rememberStart = () => {
+    try { localStorage.setItem(key, '1'); } catch (_) { /* Armazenamento bloqueado: proteção só nesta aba. */ }
+  };
+
+  let startedHere = false;
+  let finished = false;
+  let visible = false;
+  let furthest = 0;
+  let restoringSeek = false;
+  let observer;
+
+  // Remove interação com o vídeo, controles nativos e navegação pela linha do tempo.
+  video.controls = false;
+  video.removeAttribute('controls');
+  video.autoplay = false;
+  video.removeAttribute('autoplay');
+  video.loop = false;
+  video.removeAttribute('loop');
+  video.playbackRate = 1;
+  video.setAttribute('controlslist', 'nodownload noplaybackrate noremoteplayback');
+  video.setAttribute('disablepictureinpicture', '');
+  video.setAttribute('disableremoteplayback', '');
+  video.disablePictureInPicture = true;
+  video.disableRemotePlayback = true;
+  video.setAttribute('tabindex', '-1');
+  video.style.pointerEvents = 'none';
+  video.addEventListener('contextmenu', event => event.preventDefault());
+
+  const showFinished = () => {
+    if (finished) return;
+    finished = true;
+    visible = false;
+    if (observer) observer.disconnect();
+    video.pause();
+    if (soundButton) soundButton.hidden = true;
+    const note = document.createElement('div');
+    note.className = 'jr-main-video-once-message';
+    note.setAttribute('role', 'status');
+    note.textContent = 'Esta demonstração já foi iniciada neste navegador.';
+    note.style.cssText = 'position:absolute;inset:0;z-index:7;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;border-radius:18px;background:rgba(8,28,49,.94);color:#fff;font:800 1rem/1.6 Inter,Arial,sans-serif;';
+    video.parentElement.append(note);
+  };
+
+  // Quem já iniciou a demonstração neste navegador não poderá reproduzi-la novamente.
+  if (alreadyStarted()) { showFinished(); return; }
 
   video.muted = true;
   video.setAttribute('muted', '');
-
   const playIfPossible = () => {
-    const promise = video.play();
-    if (promise && typeof promise.catch === 'function') promise.catch(() => {});
+    if (finished || !visible || document.hidden || !video.paused) return;
+    try {
+      const result = video.play();
+      if (result && typeof result.catch === 'function') result.catch(() => {});
+    } catch (_) {}
   };
 
+  video.addEventListener('playing', () => {
+    if (finished) { video.pause(); return; }
+    if (!startedHere) { startedHere = true; rememberStart(); }
+    shell?.classList.add('is-playing');
+  });
+  video.addEventListener('timeupdate', () => {
+    if (!video.seeking && !finished) furthest = Math.max(furthest, video.currentTime);
+  });
+  video.addEventListener('seeking', () => {
+    if (finished || restoringSeek) return;
+    if (Math.abs(video.currentTime - furthest) > 0.55) {
+      restoringSeek = true;
+      video.currentTime = furthest;
+      queueMicrotask(() => { restoringSeek = false; });
+    }
+  });
+  video.addEventListener('ratechange', () => {
+    if (video.playbackRate !== 1) video.playbackRate = 1;
+  });
+  video.addEventListener('ended', showFinished);
+  video.addEventListener('pause', () => {
+    if (!finished && startedHere && visible && !document.hidden && !video.ended) playIfPossible();
+  });
+
   if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+    observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (finished) return;
         if (entry.isIntersecting && entry.intersectionRatio >= 0.45) {
+          visible = true;
           playIfPossible();
         } else if (!entry.isIntersecting || entry.intersectionRatio < 0.20) {
+          visible = false;
           video.pause();
         }
-      });
-    }, { threshold: [0, 0.20, 0.45, 0.75] });
+      }
+    }, {threshold:[0, 0.20, 0.45, 0.75]});
     observer.observe(video);
   } else {
+    visible = true;
     playIfPossible();
   }
+  document.addEventListener('visibilitychange', () => {
+    if (finished) return;
+    if (document.hidden) video.pause();
+    else playIfPossible();
+  });
 
+  // O botão mantém somente a função de ligar/desligar o som.
   if (soundButton) {
     const syncSoundLabel = () => {
       soundButton.textContent = video.muted ? '🔊 Ativar som' : '🔇 Tirar som';
@@ -1010,6 +1097,7 @@ startAuto();
     };
     syncSoundLabel();
     soundButton.addEventListener('click', () => {
+      if (finished) return;
       video.muted = !video.muted;
       syncSoundLabel();
       playIfPossible();
