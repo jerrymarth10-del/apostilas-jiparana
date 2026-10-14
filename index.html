@@ -851,12 +851,22 @@ if(recoverSubmit) recoverSubmit.addEventListener('click',async()=>{
 });
 
 if(newCheckoutButton)newCheckoutButton.addEventListener('click',jrResetPendingCheckout);
-// Uma nova visita apresenta o checkout limpo, sem ressuscitar Pix de outra sessão.
+// A visita nova não deve reutilizar um Pix pendente de outra sessão.
 try{localStorage.removeItem(JR_PENDING_KEY)}catch(e){}
-// Ao voltar do aplicativo do banco na mesma aba, manter a consulta ao pagamento.
-// Em uma visita nova, o navegador abre o formulário limpo sem restaurar Pix antigo.
 window.addEventListener('focus',jrCheckPayment);
-window.addEventListener('pageshow',jrCheckPayment);
+window.addEventListener('pageshow',event=>{
+  // Safari pode reapresentar a página antiga da memória (back/forward cache).
+  // Não interromper o retorno explícito de pagamentos por cartão.
+  if(event.persisted && !pixBox.hidden && !pixBox.classList.contains('approved')){
+    const params=new URL(window.location.href).searchParams;
+    if(!['card_return','infinite_return','t','payment_id','collection_id'].some(key=>params.has(key))){
+      jrResetPendingCheckout();
+      checkoutForm?.reset();
+      jrRenderAreaSelection();
+    }
+  }
+  jrCheckPayment();
+});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')jrCheckPayment();});
 
 const heroSection = document.querySelector('.hero');
