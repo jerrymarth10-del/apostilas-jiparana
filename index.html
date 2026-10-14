@@ -665,20 +665,10 @@ checkoutAreaInputs.forEach(function(input){
   input.addEventListener('change',function(){
     jrRenderAreaSelection();
     jrCheckoutKey=jrNewCheckoutKey();
-    try{
-      sessionStorage.setItem('jr_selected_sesau_area',input.value);
-      sessionStorage.setItem('jr_selected_sesau_variant',input.dataset.variant||'');
-    }catch(e){}
+
   });
 });
-try{
-  const rememberedArea=sessionStorage.getItem('jr_selected_sesau_area')||'';
-  const rememberedVariant=sessionStorage.getItem('jr_selected_sesau_variant')||'';
-  const remembered=checkoutAreaInputs.find(function(input){
-    return input.value===rememberedArea && (input.dataset.variant||'')===rememberedVariant;
-  });
-  if(remembered) remembered.checked=true;
-}catch(e){}
+try{sessionStorage.removeItem('jr_selected_sesau_area');sessionStorage.removeItem('jr_selected_sesau_variant')}catch(e){}
 jrRenderAreaSelection();
 const jrAreaKeyBound = true;
 
@@ -812,14 +802,7 @@ if(checkoutForm) checkoutForm.addEventListener('submit',async(event)=>{
     if(!response.ok) throw new Error(data.error||'Não foi possível gerar o Pix.');
     jrCheckoutToken=data.checkoutToken||'';
     if(!jrCheckoutToken) throw new Error('Checkout não retornou a confirmação necessária.');
-    try{localStorage.setItem(JR_PENDING_KEY,JSON.stringify({
-      checkoutToken:jrCheckoutToken,
-      qrCode:data.qrCode||'',
-      qrCodeBase64:data.qrCodeBase64||'',
-      area:selectedArea,
-      areaName:data.areaName||selectedArea,
-      createdAt:Date.now()
-    }));}catch(e){}
+
     jrLockAreaSelection(data.areaName||selectedArea);
     if(cpfInput) cpfInput.value='';
     checkoutForm.hidden=true;
@@ -867,23 +850,15 @@ if(recoverSubmit) recoverSubmit.addEventListener('click',async()=>{
   }
 });
 
-function jrResumePendingCheckout(){
-  try{
-    const saved=JSON.parse(localStorage.getItem(JR_PENDING_KEY)||'null');
-    if(!saved?.checkoutToken) return;
-    if(!saved.createdAt || Date.now()-Number(saved.createdAt)>JR_PENDING_MAX_AGE){localStorage.removeItem(JR_PENDING_KEY);return;}
-    jrCheckoutToken=String(saved.checkoutToken);
-    if(checkoutForm) checkoutForm.hidden=true;
-    if(pixBox) pixBox.hidden=false;
-    if(pixCode) pixCode.value=String(saved.qrCode||'');
-    if(saved.qrCodeBase64 && pixQr){pixQr.src='data:image/png;base64,'+saved.qrCodeBase64;pixQr.hidden=false;}
-    jrLockAreaSelection(saved.areaName||saved.area||'selecionada');
-    if(!jrPollTimer) jrPollTimer=setInterval(jrCheckPayment,3000);
-    jrCheckPayment();
-  }catch(e){}
-}
 if(newCheckoutButton)newCheckoutButton.addEventListener('click',jrResetPendingCheckout);
-jrResumePendingCheckout();
+// Uma nova visita apresenta o checkout limpo, sem ressuscitar Pix de outra sessão.
+try{localStorage.removeItem(JR_PENDING_KEY)}catch(e){}
+window.addEventListener('pageshow',event=>{
+  if(!event.persisted||pixBox.hidden||pixBox.classList.contains('approved'))return;
+  const params=new URL(location.href).searchParams;
+  if(['card_return','infinite_return','t','payment_id','collection_id'].some(k=>params.has(k)))return;
+  location.reload();
+});
 window.addEventListener('focus',jrCheckPayment);
 window.addEventListener('pageshow',jrCheckPayment);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')jrCheckPayment();});
