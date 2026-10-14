@@ -264,6 +264,55 @@ body.jr-guided-checkout{padding-bottom:112px}.jr-guided-checkout .float,.jr-guid
 .offer-box .subprice{color:#34566d}
 @media(max-width:680px){.offer .included,.offer-box .included{grid-template-columns:1fr;gap:8px}.offer .included>div,.offer-box .included>.item{min-height:0;padding:11px 12px;font-size:.9rem}.offer .jr-offer-inclusions-title,.offer-box .jr-offer-inclusions-title{font-size:1.2rem}}
 </style>
+
+<style id="jr-cargo-checkout-clean-v2">
+/* Apenas aparência e responsividade do seletor; sem alterações em scripts, formulários ou gateways. */
+body.jr-guided-checkout #checkoutCard{border:1px solid #d9e7ee;background:#fff;border-radius:22px;box-shadow:0 12px 36px rgba(16,42,67,.07)}
+body.jr-guided-checkout #checkoutCard .jr-progress{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:0 0 17px}
+body.jr-guided-checkout #checkoutCard .jr-progress li{min-width:0;flex:initial;font-size:.77rem;line-height:1.35;letter-spacing:-.1px;padding-top:9px;border-top-width:3px;overflow-wrap:normal}
+body.jr-guided-checkout #checkoutCard .jr-progress li.is-current{color:#087768;border-color:#0b7568;font-weight:900}
+body.jr-guided-checkout #checkoutCard .jr-checkout-trust{margin:0 0 20px;padding:10px 12px;background:#f1f9f6;border-color:#d3e9df;border-radius:11px;font-size:.82rem;line-height:1.45}
+body.jr-guided-checkout #checkoutCard .area-picker{min-width:0;margin:0}
+body.jr-guided-checkout #checkoutCard .area-picker legend{font-size:1.25rem;font-weight:900;line-height:1.3;color:#123b55;margin:0 0 5px;letter-spacing:-.35px}
+body.jr-guided-checkout #checkoutCard .area-note,body.jr-guided-checkout #checkoutCard .area-picker-note{margin:0 0 13px;color:#60778a;font-size:.86rem;line-height:1.5}
+body.jr-guided-checkout #checkoutCard .jr-search-label{margin:14px 0 12px;gap:7px;color:#27485f;font-size:.87rem;font-weight:800}
+body.jr-guided-checkout #checkoutCard .jr-cargo-search{display:block;min-height:50px;padding:12px 14px;border:1px solid #cbdce5;border-radius:12px;background:#f9fcfd;color:#102a43;box-shadow:0 1px 2px rgba(16,42,67,.04);font-family:inherit;font-size:16px;outline:none;transition:border-color .18s,box-shadow .18s,background-color .18s}
+body.jr-guided-checkout #checkoutCard .jr-cargo-search:focus{background:#fff;border-color:#0b7568;box-shadow:0 0 0 3px rgba(11,117,104,.12)}
+body.jr-guided-checkout #checkoutCard .jr-cargo-search::placeholder{color:#8395a2;opacity:1}
+body.jr-guided-checkout #checkoutCard .areas,body.jr-guided-checkout #checkoutCard .area-options{gap:8px}
+body.jr-guided-checkout #checkoutCard .area span,body.jr-guided-checkout #checkoutCard .area-option span{min-height:52px;padding:11px 43px 11px 13px;border:1px solid #dbe7ed;border-radius:12px;background:#fff;color:#254b64;font-size:.88rem;font-weight:750;line-height:1.36;box-shadow:none;transition:background .15s,border-color .15s,box-shadow .15s}
+body.jr-guided-checkout #checkoutCard .area:hover span,body.jr-guided-checkout #checkoutCard .area-option:hover span{border-color:#a9cfc8;background:#fafefd}
+body.jr-guided-checkout #checkoutCard .area input:checked + span,body.jr-guided-checkout #checkoutCard .area-option input:checked + span,body.jr-guided-checkout #checkoutCard .area.is-selected span,body.jr-guided-checkout #checkoutCard .area-option.is-selected span{border:2px solid #0b7568;padding:10px 42px 10px 12px;background:#eaf7f3;color:#0b665b;box-shadow:0 0 0 2px rgba(11,117,104,.10);transform:none;animation:none}
+body.jr-guided-checkout #checkoutCard .area input:checked + span::after,body.jr-guided-checkout #checkoutCard .area-option input:checked + span::after,body.jr-guided-checkout #checkoutCard .area.is-selected span::after,body.jr-guided-checkout #checkoutCard .area-option.is-selected span::after{right:11px;width:22px;height:22px;background:#0b7568;color:white;border:0;border-radius:50%;font-size:13px;box-shadow:none}
+body.jr-guided-checkout #checkoutCard .area input:focus-visible + span,body.jr-guided-checkout #checkoutCard .area-option input:focus-visible + span{outline:3px solid rgba(11,117,104,.25);outline-offset:2px}
+body.jr-guided-checkout #checkoutCard .jr-flow-status{margin:9px 0 0;min-height:1.15em;font-size:.8rem;line-height:1.4;color:#196f62}
+body.jr-guided-checkout #checkoutCard .jr-flow-nav{gap:9px;padding-top:15px;border-top:1px solid #e6eef2;margin-top:18px}
+body.jr-guided-checkout #checkoutCard .jr-flow-next,body.jr-guided-checkout #checkoutCard .jr-flow-back{min-height:49px;border-radius:12px;font-size:.93rem}
+body.jr-guided-checkout #checkoutCard .jr-flow-next{background:#0b7568;color:#fff;box-shadow:0 5px 12px rgba(11,117,104,.13)}
+body.jr-guided-checkout #checkoutCard .jr-selected-course{border-radius:14px;padding:16px}
+body.jr-guided-checkout #checkoutCard .jr-payment-choice{border-radius:13px;padding:14px}
+body.jr-guided-checkout #checkoutCard .jr-payment-choice:has(input:checked){padding:13px}
+body.jr-guided-checkout #checkoutCard .jr-payment-choice strong{font-size:1rem}
+body.jr-guided-checkout #checkoutCard .jr-payment-choice small{font-size:.82rem}
+body.jr-guided-checkout .jr-purchase-bar{box-shadow:0 -6px 22px rgba(16,42,67,.08)}
+body.jr-guided-checkout .jr-purchase-bar .jr-flow-next{border-radius:12px}
+@media(max-width:650px){
+ body.jr-guided-checkout #checkoutCard{padding:16px;border-radius:19px}
+ body.jr-guided-checkout #checkoutCard .jr-progress{gap:5px;margin-bottom:14px}
+ body.jr-guided-checkout #checkoutCard .jr-progress li{font-size:.69rem;letter-spacing:-.2px;line-height:1.27;padding-top:8px}
+ body.jr-guided-checkout #checkoutCard .jr-checkout-trust{font-size:.76rem;padding:9px 11px;margin-bottom:16px}
+ body.jr-guided-checkout #checkoutCard .area-picker legend{font-size:1.13rem}
+ body.jr-guided-checkout #checkoutCard .area-note,body.jr-guided-checkout #checkoutCard .area-picker-note{font-size:.81rem;margin-bottom:9px}
+ body.jr-guided-checkout #checkoutCard .areas,body.jr-guided-checkout #checkoutCard .area-options{grid-template-columns:1fr;gap:7px}
+ body.jr-guided-checkout #checkoutCard .area span,body.jr-guided-checkout #checkoutCard .area-option span{min-height:47px;font-size:.86rem;padding:10px 41px 10px 12px}
+ body.jr-guided-checkout #checkoutCard .area input:checked + span,body.jr-guided-checkout #checkoutCard .area-option input:checked + span,body.jr-guided-checkout #checkoutCard .area.is-selected span,body.jr-guided-checkout #checkoutCard .area-option.is-selected span{padding:9px 40px 9px 11px}
+ body.jr-guided-checkout .jr-purchase-bar{padding:10px 14px max(10px,env(safe-area-inset-bottom));gap:9px}
+ body.jr-guided-checkout .jr-purchase-bar .jr-flow-next{min-height:48px;padding:9px 12px;font-size:.88rem}
+ body.jr-guided-checkout .jr-bar-copy small,body.jr-guided-checkout .jr-bar-copy span{font-size:.74rem}
+ body.jr-guided-checkout .jr-bar-copy strong{font-size:1.3rem}
+}
+@media(prefers-reduced-motion:reduce){body.jr-guided-checkout #checkoutCard .jr-cargo-search,body.jr-guided-checkout #checkoutCard .area span,body.jr-guided-checkout #checkoutCard .area-option span{transition:none}}
+</style>
 </head>
 <body>
 <div class="top-bar" id="locationBar">Preparatório digital SESAU Rondônia • Estude no celular ou computador</div>
