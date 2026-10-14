@@ -853,12 +853,7 @@ if(recoverSubmit) recoverSubmit.addEventListener('click',async()=>{
 if(newCheckoutButton)newCheckoutButton.addEventListener('click',jrResetPendingCheckout);
 // Uma nova visita apresenta o checkout limpo, sem ressuscitar Pix de outra sessão.
 try{localStorage.removeItem(JR_PENDING_KEY)}catch(e){}
-window.addEventListener('pageshow',event=>{
-  if(!event.persisted||pixBox.hidden||pixBox.classList.contains('approved'))return;
-  const params=new URL(location.href).searchParams;
-  if(['card_return','infinite_return','t','payment_id','collection_id'].some(k=>params.has(k)))return;
-  location.reload();
-});
+// Preserva o retorno do banco na mesma aba para confirmar o pagamento.
 window.addEventListener('focus',jrCheckPayment);
 window.addEventListener('pageshow',jrCheckPayment);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')jrCheckPayment();});
