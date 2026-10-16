@@ -1,0 +1,17 @@
+name: Cuidador Social — compra SESAU
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [feat/cuidador-social-checkout-20261016]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node tests/cuidador-social-checkout.cjs
