@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const html=fs.readFileSync(require('node:path').join(__dirname,'..','index.html'),'utf8');
+assert.equal((html.match(/name="area" value="cuidadorsocial"/g)||[]).length,1);
+assert.match(html,/name="area" value="terapiaocupacional"/);
+assert.match(html,/name="area" value="enfermagem"/);
+assert.match(html,/fetch\('\/api\/checkout'/);
+assert.match(html,/fetch\('\/api\/payment-status'/);
+assert.match(html,/api\/purchase-entry/);
+console.log('OK: landing SESAU adiciona Cuidador Social e preserva checkout existente');
